@@ -15,5 +15,7 @@ dist/
 build/
 
 data/raw/
-data/processed/*.csv
 data/processed/*.json
+!data/processed/panel.csv
+data/processed/*.csv
+!data/processed/panel.csv
