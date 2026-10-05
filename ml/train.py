@@ -62,6 +62,7 @@ def main():
         LABELS[c] = c.replace("_", " ").capitalize()
     df = df.dropna(subset=["rain_z_6", "temp_anom_3"])           # warm-up rows
     lab = df.dropna(subset=["target"]).copy()
+    lab = lab[lab.date <= "2025-09-01"].copy()
 
     last_year = int(lab.year.max())
     test_start = last_year - TEST_YEARS + 1
@@ -135,7 +136,10 @@ def main():
         cur = g.iloc[-1]
         prev = g.iloc[-2]["prob"] if len(g) > 1 else cur.prob
         z = ((cur[feats].astype(float) - mu) / sd)
-        contrib = (z.clip(lower=0) * imp_n).sort_values(ascending=False)
+        contrib = (z.clip(lower=0) * imp_n).drop(
+            labels=["month_sin", "month_cos", "lat", "lon", "coastal", "himalayan"], errors="ignore"
+        ).sort_values(ascending=False)
+        
         drivers = [{"label": LABELS[f], "z": float(z[f])} for f, v in contrib.head(3).items() if v > 0]
         hz = haz_tot.loc[s]
         dominant = hz.idxmax().replace("n_", "") if hz.sum() > 0 else "none"

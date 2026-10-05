@@ -1,47 +1,47 @@
 {
  "meta": {
-  "generated": "2026-10-04",
-  "as_of": "2025-12",
+  "generated": "2026-10-05",
+  "as_of": "2026-08",
   "horizon_months": 3,
   "n_states": 30,
   "train_years": [
-   1990,
-   2016
+   2000,
+   2017
   ],
   "val_years": [
-   2017,
-   2020
+   2018,
+   2021
   ],
   "test_years": [
-   2021,
-   2025
+   2022,
+   2026
   ],
-  "n_rows": 12720,
-  "positive_rate": 0.07154088050314465,
+  "n_rows": 9420,
+  "positive_rate": 0.0935244161358811,
   "hi_threshold_displaced": 5000.0,
   "thresholds": {
-   "moderate": 0.07926829268292683,
-   "high": 0.10497237569060776,
-   "critical": 0.39325842696629215
+   "moderate": 0.06643356643356643,
+   "high": 0.12903225806451613,
+   "critical": 0.25316455696202533
   },
   "model": "Gradient boosting (calibrated)",
   "metrics": {
    "gradient_boosting": {
-    "roc_auc": 0.6404571481656645,
-    "pr_auc": 0.13182177386312374,
-    "brier": 0.08749032705332917,
-    "recall_at_high": 0.4605263157894737,
-    "precision_at_high": 0.13333333333333333,
-    "base_rate": 0.08888888888888889
+    "roc_auc": 0.6536648945445767,
+    "pr_auc": 0.1473248483946283,
+    "brier": 0.08418205035049331,
+    "recall_at_high": 0.40268456375838924,
+    "precision_at_high": 0.14962593516209477,
+    "base_rate": 0.0903030303030303
    },
    "logistic_regression": {
-    "roc_auc": 0.6665934734139586,
-    "pr_auc": 0.13801832234767716,
-    "brier": 0.26720360853046726
+    "roc_auc": 0.654659757029989,
+    "pr_auc": 0.13018466493427178,
+    "brier": 0.20782855854265417
    },
    "persistence": {
-    "roc_auc": 0.5350018579825688,
-    "pr_auc": 0.09981661452816457
+    "roc_auc": 0.5137872290955917,
+    "pr_auc": 0.10141644027887925
    }
   }
  },
@@ -49,120 +49,188 @@
   {
    "feature": "month_cos",
    "label": "Season (cos)",
-   "importance": 0.3587879188234027
+   "importance": 0.347073497201266
   },
   {
    "feature": "month_sin",
    "label": "Season (sin)",
-   "importance": 0.161508589978909
-  },
-  {
-   "feature": "months_since_event",
-   "label": "Months since last disaster",
-   "importance": 0.10594385961601087
-  },
-  {
-   "feature": "rain_z_6",
-   "label": "6-month rainfall anomaly",
-   "importance": 0.09077397101914304
-  },
-  {
-   "feature": "hi_events_36m",
-   "label": "High-impact disasters (3 yrs)",
-   "importance": 0.07638734883194215
+   "importance": 0.2087968918402116
   },
   {
    "feature": "lat",
    "label": "Latitude",
-   "importance": 0.06465250810397621
+   "importance": 0.16655946876195143
   },
   {
-   "feature": "lon",
-   "label": "Longitude",
-   "importance": 0.030759721232653473
-  },
-  {
-   "feature": "rain_z_3",
-   "label": "3-month rainfall anomaly",
-   "importance": 0.029311150222004017
+   "feature": "months_since_event",
+   "label": "Months since last disaster",
+   "importance": 0.07901209887702977
   },
   {
    "feature": "temp_anom_3",
    "label": "3-month temperature anomaly",
-   "importance": 0.02494184482831825
+   "importance": 0.0725063449570629
   },
   {
-   "feature": "rain_z_1",
-   "label": "Last-month rainfall anomaly",
-   "importance": 0.02478141676850685
+   "feature": "rain_z_6",
+   "label": "6-month rainfall anomaly",
+   "importance": 0.06791711573897023
+  },
+  {
+   "feature": "cyclone_12m",
+   "label": "Cyclones in last 12 months",
+   "importance": 0.016905399297708693
+  },
+  {
+   "feature": "lon",
+   "label": "Longitude",
+   "importance": 0.016366512533463
+  },
+  {
+   "feature": "temp_anom_1",
+   "label": "Last-month temperature anomaly",
+   "importance": 0.006688280082049537
+  },
+  {
+   "feature": "flood_12m",
+   "label": "Floods in last 12 months",
+   "importance": 0.0062536939818512716
   }
  ],
  "states": [
   {
+   "name": "Odisha",
+   "lat": 20.5,
+   "lon": 84.4,
+   "prob": 41.2,
+   "level": "CRITICAL",
+   "delta": 13.2,
+   "events": 62,
+   "affected": 128357276.35287115,
+   "displaced_est": 7903292.389072129,
+   "dominant_hazard": "flood",
+   "drivers": [
+    {
+     "label": "3-month temperature anomaly",
+     "z": 1.0075344749081447
+    },
+    {
+     "label": "Cyclones in last 12 months",
+     "z": 1.1581844658904854
+    },
+    {
+     "label": "Longitude",
+     "z": 0.289586737100353
+    }
+   ],
+   "trend": [
+    {
+     "m": "Nov 25",
+     "p": 9.3
+    },
+    {
+     "m": "Dec 25",
+     "p": 1.3
+    },
+    {
+     "m": "Jan 26",
+     "p": 0.1
+    },
+    {
+     "m": "Feb 26",
+     "p": 6.6
+    },
+    {
+     "m": "Mar 26",
+     "p": 18.2
+    },
+    {
+     "m": "Apr 26",
+     "p": 28.0
+    },
+    {
+     "m": "May 26",
+     "p": 28.0
+    },
+    {
+     "m": "Jun 26",
+     "p": 25.3
+    },
+    {
+     "m": "Jul 26",
+     "p": 28.0
+    },
+    {
+     "m": "Aug 26",
+     "p": 41.2
+    }
+   ]
+  },
+  {
    "name": "West Bengal",
    "lat": 23.0,
    "lon": 87.9,
-   "prob": 13.6,
-   "level": "HIGH",
-   "delta": 3.1,
+   "prob": 28.0,
+   "level": "CRITICAL",
+   "delta": -17.5,
    "events": 61,
    "affected": 54539816.564775914,
    "displaced_est": 3414881.066334034,
    "dominant_hazard": "flood",
    "drivers": [
     {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
-    },
-    {
-     "label": "High-impact disasters (3 yrs)",
-     "z": 0.7960212415122805
+     "label": "6-month rainfall anomaly",
+     "z": 0.8527747171994261
     },
     {
      "label": "Longitude",
-     "z": 0.777665064928682
+     "z": 0.7776542715391498
+    },
+    {
+     "label": "3-month temperature anomaly",
+     "z": 0.14013645084943646
     }
    ],
    "trend": [
     {
-     "m": "Mar 25",
-     "p": 17.5
-    },
-    {
-     "m": "Apr 25",
-     "p": 10.5
-    },
-    {
-     "m": "May 25",
-     "p": 39.3
-    },
-    {
-     "m": "Jun 25",
-     "p": 41.7
-    },
-    {
-     "m": "Jul 25",
-     "p": 41.7
-    },
-    {
-     "m": "Aug 25",
-     "p": 39.3
-    },
-    {
-     "m": "Sep 25",
-     "p": 10.5
-    },
-    {
-     "m": "Oct 25",
-     "p": 7.9
-    },
-    {
      "m": "Nov 25",
-     "p": 10.5
+     "p": 25.3
     },
     {
      "m": "Dec 25",
-     "p": 13.6
+     "p": 25.3
+    },
+    {
+     "m": "Jan 26",
+     "p": 6.6
+    },
+    {
+     "m": "Feb 26",
+     "p": 9.3
+    },
+    {
+     "m": "Mar 26",
+     "p": 28.0
+    },
+    {
+     "m": "Apr 26",
+     "p": 41.2
+    },
+    {
+     "m": "May 26",
+     "p": 50.0
+    },
+    {
+     "m": "Jun 26",
+     "p": 50.0
+    },
+    {
+     "m": "Jul 26",
+     "p": 45.5
+    },
+    {
+     "m": "Aug 26",
+     "p": 28.0
     }
    ]
   },
@@ -170,543 +238,67 @@
    "name": "Assam",
    "lat": 26.2,
    "lon": 92.9,
-   "prob": 10.5,
+   "prob": 20.4,
    "level": "HIGH",
-   "delta": 0.0,
-   "events": 59,
-   "affected": 62163176.32924837,
-   "displaced_est": 5703520.721224323,
+   "delta": -4.9,
+   "events": 60,
+   "affected": 62735542.82924837,
+   "displaced_est": 5732139.046224323,
    "dominant_hazard": "flood",
    "drivers": [
     {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
+     "label": "3-month temperature anomaly",
+     "z": 1.2894537228283514
     },
     {
-     "label": "High-impact disasters (3 yrs)",
-     "z": 3.7040583451119704
+     "label": "Latitude",
+     "z": 0.45108530897787297
     },
     {
      "label": "Longitude",
-     "z": 1.4749140771181755
+     "z": 1.4748936064517169
     }
    ],
    "trend": [
     {
-     "m": "Mar 25",
-     "p": 39.3
-    },
-    {
-     "m": "Apr 25",
-     "p": 41.7
-    },
-    {
-     "m": "May 25",
-     "p": 41.7
-    },
-    {
-     "m": "Jun 25",
-     "p": 41.7
-    },
-    {
-     "m": "Jul 25",
-     "p": 41.7
-    },
-    {
-     "m": "Aug 25",
-     "p": 39.3
-    },
-    {
-     "m": "Sep 25",
-     "p": 7.9
-    },
-    {
-     "m": "Oct 25",
-     "p": 7.9
-    },
-    {
      "m": "Nov 25",
-     "p": 10.5
+     "p": 10.8
     },
     {
      "m": "Dec 25",
-     "p": 10.5
-    }
-   ]
-  },
-  {
-   "name": "Andhra Pradesh",
-   "lat": 15.9,
-   "lon": 79.7,
-   "prob": 7.9,
-   "level": "MODERATE",
-   "delta": -2.6,
-   "events": 55,
-   "affected": 62074031.71230159,
-   "displaced_est": 3846701.5856150794,
-   "dominant_hazard": "cyclone",
-   "drivers": [
-    {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
-    },
-    {
-     "label": "6-month rainfall anomaly",
-     "z": 0.6234633168677947
-    },
-    {
-     "label": "Cyclones in last 12 months",
-     "z": 1.4709884421746413
-    }
-   ],
-   "trend": [
-    {
-     "m": "Mar 25",
-     "p": 7.9
-    },
-    {
-     "m": "Apr 25",
-     "p": 7.9
-    },
-    {
-     "m": "May 25",
-     "p": 10.5
-    },
-    {
-     "m": "Jun 25",
-     "p": 10.5
-    },
-    {
-     "m": "Jul 25",
-     "p": 7.9
-    },
-    {
-     "m": "Aug 25",
-     "p": 7.9
-    },
-    {
-     "m": "Sep 25",
-     "p": 7.9
-    },
-    {
-     "m": "Oct 25",
-     "p": 2.5
-    },
-    {
-     "m": "Nov 25",
-     "p": 10.5
-    },
-    {
-     "m": "Dec 25",
-     "p": 7.9
-    }
-   ]
-  },
-  {
-   "name": "Odisha",
-   "lat": 20.5,
-   "lon": 84.4,
-   "prob": 7.9,
-   "level": "MODERATE",
-   "delta": 0.0,
-   "events": 62,
-   "affected": 128357276.35287115,
-   "displaced_est": 7903292.389072129,
-   "dominant_hazard": "flood",
-   "drivers": [
-    {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
-    },
-    {
-     "label": "Cyclones in last 12 months",
-     "z": 5.135942627579126
-    },
-    {
-     "label": "High-impact disasters (3 yrs)",
-     "z": 0.7960212415122805
-    }
-   ],
-   "trend": [
-    {
-     "m": "Mar 25",
-     "p": 15.4
-    },
-    {
-     "m": "Apr 25",
-     "p": 17.5
-    },
-    {
-     "m": "May 25",
-     "p": 39.3
-    },
-    {
-     "m": "Jun 25",
-     "p": 39.3
-    },
-    {
-     "m": "Jul 25",
-     "p": 39.3
-    },
-    {
-     "m": "Aug 25",
-     "p": 31.2
-    },
-    {
-     "m": "Sep 25",
-     "p": 10.5
-    },
-    {
-     "m": "Oct 25",
-     "p": 10.5
-    },
-    {
-     "m": "Nov 25",
-     "p": 7.9
-    },
-    {
-     "m": "Dec 25",
-     "p": 7.9
-    }
-   ]
-  },
-  {
-   "name": "Tamil Nadu",
-   "lat": 11.1,
-   "lon": 78.4,
-   "prob": 7.9,
-   "level": "MODERATE",
-   "delta": 0.0,
-   "events": 33,
-   "affected": 52036854.7254902,
-   "displaced_est": 2851842.7362745097,
-   "dominant_hazard": "flood",
-   "drivers": [
-    {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
-    },
-    {
-     "label": "Cyclones in last 12 months",
-     "z": 1.4709884421746413
-    },
-    {
-     "label": "3-month temperature anomaly",
-     "z": 0.716922114150212
-    }
-   ],
-   "trend": [
-    {
-     "m": "Mar 25",
-     "p": 17.5
-    },
-    {
-     "m": "Apr 25",
-     "p": 10.5
-    },
-    {
-     "m": "May 25",
-     "p": 17.5
-    },
-    {
-     "m": "Jun 25",
-     "p": 10.5
-    },
-    {
-     "m": "Jul 25",
-     "p": 7.9
-    },
-    {
-     "m": "Aug 25",
-     "p": 10.5
-    },
-    {
-     "m": "Sep 25",
-     "p": 10.5
-    },
-    {
-     "m": "Oct 25",
-     "p": 10.5
-    },
-    {
-     "m": "Nov 25",
-     "p": 7.9
-    },
-    {
-     "m": "Dec 25",
-     "p": 7.9
-    }
-   ]
-  },
-  {
-   "name": "Chhattisgarh",
-   "lat": 21.3,
-   "lon": 81.9,
-   "prob": 2.5,
-   "level": "LOW",
-   "delta": 0.0,
-   "events": 13,
-   "affected": 56697608.125,
-   "displaced_est": 3334880.40625,
-   "dominant_hazard": "flood",
-   "drivers": [
-    {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
-    },
-    {
-     "label": "6-month rainfall anomaly",
-     "z": 0.6929651357757096
-    },
-    {
-     "label": "Months since last disaster",
-     "z": 0.08295758590989363
-    }
-   ],
-   "trend": [
-    {
-     "m": "Mar 25",
-     "p": 7.9
-    },
-    {
-     "m": "Apr 25",
-     "p": 39.3
-    },
-    {
-     "m": "May 25",
-     "p": 41.7
-    },
-    {
-     "m": "Jun 25",
-     "p": 20.0
-    },
-    {
-     "m": "Jul 25",
-     "p": 39.3
-    },
-    {
-     "m": "Aug 25",
-     "p": 10.5
-    },
-    {
-     "m": "Sep 25",
-     "p": 1.5
-    },
-    {
-     "m": "Oct 25",
-     "p": 0.1
-    },
-    {
-     "m": "Nov 25",
-     "p": 2.5
-    },
-    {
-     "m": "Dec 25",
-     "p": 2.5
-    }
-   ]
-  },
-  {
-   "name": "Jharkhand",
-   "lat": 23.6,
-   "lon": 85.3,
-   "prob": 2.5,
-   "level": "LOW",
-   "delta": 1.0,
-   "events": 19,
-   "affected": 39012538.177871145,
-   "displaced_est": 1950626.9088935575,
-   "dominant_hazard": "flood",
-   "drivers": [
-    {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
-    },
-    {
-     "label": "Months since last disaster",
-     "z": 0.47809652972849176
-    },
-    {
-     "label": "Longitude",
-     "z": 0.4150955785901442
-    }
-   ],
-   "trend": [
-    {
-     "m": "Mar 25",
-     "p": 7.9
-    },
-    {
-     "m": "Apr 25",
-     "p": 31.2
-    },
-    {
-     "m": "May 25",
-     "p": 39.3
-    },
-    {
-     "m": "Jun 25",
-     "p": 39.3
-    },
-    {
-     "m": "Jul 25",
-     "p": 10.5
-    },
-    {
-     "m": "Aug 25",
-     "p": 7.9
-    },
-    {
-     "m": "Sep 25",
-     "p": 0.1
-    },
-    {
-     "m": "Oct 25",
-     "p": 0.1
-    },
-    {
-     "m": "Nov 25",
-     "p": 1.5
-    },
-    {
-     "m": "Dec 25",
-     "p": 2.5
-    }
-   ]
-  },
-  {
-   "name": "Kerala",
-   "lat": 10.5,
-   "lon": 76.3,
-   "prob": 2.5,
-   "level": "LOW",
-   "delta": 0.0,
-   "events": 29,
-   "affected": 29073166.499696545,
-   "displaced_est": 1657108.3249848273,
-   "dominant_hazard": "flood",
-   "drivers": [
-    {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
-    },
-    {
-     "label": "3-month temperature anomaly",
-     "z": 0.5435261177728474
-    },
-    {
-     "label": "Season (sin)",
-     "z": 0.01237542471897047
-    }
-   ],
-   "trend": [
-    {
-     "m": "Mar 25",
-     "p": 10.5
-    },
-    {
-     "m": "Apr 25",
-     "p": 31.2
-    },
-    {
-     "m": "May 25",
-     "p": 15.4
-    },
-    {
-     "m": "Jun 25",
-     "p": 39.3
-    },
-    {
-     "m": "Jul 25",
-     "p": 7.9
-    },
-    {
-     "m": "Aug 25",
-     "p": 7.9
-    },
-    {
-     "m": "Sep 25",
-     "p": 7.9
-    },
-    {
-     "m": "Oct 25",
-     "p": 7.9
-    },
-    {
-     "m": "Nov 25",
-     "p": 2.5
-    },
-    {
-     "m": "Dec 25",
-     "p": 2.5
-    }
-   ]
-  },
-  {
-   "name": "Nagaland",
-   "lat": 26.1,
-   "lon": 94.5,
-   "prob": 2.5,
-   "level": "LOW",
-   "delta": 2.4,
-   "events": 10,
-   "affected": 50343145.51785714,
-   "displaced_est": 2548585.847321429,
-   "dominant_hazard": "flood",
-   "drivers": [
-    {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
-    },
-    {
-     "label": "6-month rainfall anomaly",
-     "z": 1.303365596659891
-    },
-    {
-     "label": "High-impact disasters (3 yrs)",
-     "z": 0.7960212415122805
-    }
-   ],
-   "trend": [
-    {
-     "m": "Mar 25",
-     "p": 10.5
-    },
-    {
-     "m": "Apr 25",
-     "p": 17.5
+     "p": 18.2
     },
     {
-     "m": "May 25",
-     "p": 17.5
+     "m": "Jan 26",
+     "p": 18.2
     },
     {
-     "m": "Jun 25",
-     "p": 13.6
+     "m": "Feb 26",
+     "p": 9.3
     },
     {
-     "m": "Jul 25",
-     "p": 7.9
+     "m": "Mar 26",
+     "p": 20.4
     },
     {
-     "m": "Aug 25",
-     "p": 2.5
+     "m": "Apr 26",
+     "p": 41.2
     },
     {
-     "m": "Sep 25",
-     "p": 0.1
+     "m": "May 26",
+     "p": 28.0
     },
     {
-     "m": "Oct 25",
-     "p": 0.1
+     "m": "Jun 26",
+     "p": 18.2
     },
     {
-     "m": "Nov 25",
-     "p": 0.1
+     "m": "Jul 26",
+     "p": 25.3
     },
     {
-     "m": "Dec 25",
-     "p": 2.5
+     "m": "Aug 26",
+     "p": 20.4
     }
    ]
   },
@@ -714,67 +306,1147 @@
    "name": "Bihar",
    "lat": 25.1,
    "lon": 85.3,
-   "prob": 1.5,
-   "level": "LOW",
-   "delta": 0.0,
+   "prob": 10.8,
+   "level": "MODERATE",
+   "delta": -30.4,
    "events": 67,
    "affected": 57934731.826680675,
    "displaced_est": 3130319.9246673672,
    "dominant_hazard": "flood",
    "drivers": [
     {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
+     "label": "3-month temperature anomaly",
+     "z": 1.6053224013079597
+    },
+    {
+     "label": "Latitude",
+     "z": 0.2597509234217062
     },
     {
      "label": "6-month rainfall anomaly",
-     "z": 0.8739816522593649
-    },
-    {
-     "label": "3-month rainfall anomaly",
-     "z": 1.4552489223199419
+     "z": 0.42293843302200684
     }
    ],
    "trend": [
     {
-     "m": "Mar 25",
-     "p": 7.9
-    },
-    {
-     "m": "Apr 25",
-     "p": 39.3
-    },
-    {
-     "m": "May 25",
-     "p": 17.5
-    },
-    {
-     "m": "Jun 25",
-     "p": 31.2
-    },
-    {
-     "m": "Jul 25",
-     "p": 39.3
-    },
-    {
-     "m": "Aug 25",
-     "p": 15.4
-    },
-    {
-     "m": "Sep 25",
-     "p": 2.5
-    },
-    {
-     "m": "Oct 25",
-     "p": 1.5
-    },
-    {
      "m": "Nov 25",
-     "p": 1.5
+     "p": 1.3
     },
     {
      "m": "Dec 25",
-     "p": 1.5
+     "p": 1.3
+    },
+    {
+     "m": "Jan 26",
+     "p": 1.3
+    },
+    {
+     "m": "Feb 26",
+     "p": 3.6
+    },
+    {
+     "m": "Mar 26",
+     "p": 18.2
+    },
+    {
+     "m": "Apr 26",
+     "p": 28.0
+    },
+    {
+     "m": "May 26",
+     "p": 28.0
+    },
+    {
+     "m": "Jun 26",
+     "p": 28.0
+    },
+    {
+     "m": "Jul 26",
+     "p": 41.2
+    },
+    {
+     "m": "Aug 26",
+     "p": 10.8
+    }
+   ]
+  },
+  {
+   "name": "Uttar Pradesh",
+   "lat": 26.8,
+   "lon": 80.9,
+   "prob": 10.8,
+   "level": "MODERATE",
+   "delta": -14.5,
+   "events": 94,
+   "affected": 51404134.15445845,
+   "displaced_est": 3408185.279151494,
+   "dominant_hazard": "flood",
+   "drivers": [
+    {
+     "label": "6-month rainfall anomaly",
+     "z": 2.2096081940381254
+    },
+    {
+     "label": "Latitude",
+     "z": 0.5554495192812371
+    },
+    {
+     "label": "3-month temperature anomaly",
+     "z": 0.6428262647465909
+    }
+   ],
+   "trend": [
+    {
+     "m": "Nov 25",
+     "p": 0.1
+    },
+    {
+     "m": "Dec 25",
+     "p": 0.1
+    },
+    {
+     "m": "Jan 26",
+     "p": 0.1
+    },
+    {
+     "m": "Feb 26",
+     "p": 6.1
+    },
+    {
+     "m": "Mar 26",
+     "p": 6.6
+    },
+    {
+     "m": "Apr 26",
+     "p": 25.3
+    },
+    {
+     "m": "May 26",
+     "p": 25.3
+    },
+    {
+     "m": "Jun 26",
+     "p": 25.3
+    },
+    {
+     "m": "Jul 26",
+     "p": 25.3
+    },
+    {
+     "m": "Aug 26",
+     "p": 10.8
+    }
+   ]
+  },
+  {
+   "name": "Andhra Pradesh",
+   "lat": 15.9,
+   "lon": 79.7,
+   "prob": 9.3,
+   "level": "MODERATE",
+   "delta": -3.6,
+   "events": 55,
+   "affected": 62074031.71230159,
+   "displaced_est": 3846701.5856150794,
+   "dominant_hazard": "cyclone",
+   "drivers": [
+    {
+     "label": "3-month temperature anomaly",
+     "z": 1.8997493341711007
+    },
+    {
+     "label": "Cyclones in last 12 months",
+     "z": 1.1581844658904854
+    },
+    {
+     "label": "Last-month temperature anomaly",
+     "z": 2.4899114901692316
+    }
+   ],
+   "trend": [
+    {
+     "m": "Nov 25",
+     "p": 18.2
+    },
+    {
+     "m": "Dec 25",
+     "p": 6.6
+    },
+    {
+     "m": "Jan 26",
+     "p": 6.1
+    },
+    {
+     "m": "Feb 26",
+     "p": 6.6
+    },
+    {
+     "m": "Mar 26",
+     "p": 9.3
+    },
+    {
+     "m": "Apr 26",
+     "p": 20.4
+    },
+    {
+     "m": "May 26",
+     "p": 25.3
+    },
+    {
+     "m": "Jun 26",
+     "p": 41.2
+    },
+    {
+     "m": "Jul 26",
+     "p": 12.9
+    },
+    {
+     "m": "Aug 26",
+     "p": 9.3
+    }
+   ]
+  },
+  {
+   "name": "Chhattisgarh",
+   "lat": 21.3,
+   "lon": 81.9,
+   "prob": 9.3,
+   "level": "MODERATE",
+   "delta": -1.5,
+   "events": 13,
+   "affected": 56697608.125,
+   "displaced_est": 3334880.40625,
+   "dominant_hazard": "flood",
+   "drivers": [
+    {
+     "label": "Months since last disaster",
+     "z": 1.233744426906811
+    },
+    {
+     "label": "6-month rainfall anomaly",
+     "z": 0.9802508130823416
+    },
+    {
+     "label": "3-month temperature anomaly",
+     "z": 0.622575727219927
+    }
+   ],
+   "trend": [
+    {
+     "m": "Nov 25",
+     "p": 9.3
+    },
+    {
+     "m": "Dec 25",
+     "p": 6.6
+    },
+    {
+     "m": "Jan 26",
+     "p": 0.1
+    },
+    {
+     "m": "Feb 26",
+     "p": 1.3
+    },
+    {
+     "m": "Mar 26",
+     "p": 10.8
+    },
+    {
+     "m": "Apr 26",
+     "p": 18.2
+    },
+    {
+     "m": "May 26",
+     "p": 20.4
+    },
+    {
+     "m": "Jun 26",
+     "p": 12.9
+    },
+    {
+     "m": "Jul 26",
+     "p": 10.8
+    },
+    {
+     "m": "Aug 26",
+     "p": 9.3
+    }
+   ]
+  },
+  {
+   "name": "Kerala",
+   "lat": 10.5,
+   "lon": 76.3,
+   "prob": 9.3,
+   "level": "MODERATE",
+   "delta": 0.0,
+   "events": 30,
+   "affected": 29645532.999696545,
+   "displaced_est": 1685726.6499848273,
+   "dominant_hazard": "flood",
+   "drivers": [
+    {
+     "label": "3-month temperature anomaly",
+     "z": 1.0160714662184047
+    },
+    {
+     "label": "Last-month temperature anomaly",
+     "z": 0.6398094039641462
+    },
+    {
+     "label": "Floods in last 12 months",
+     "z": 0.45346538589570795
+    }
+   ],
+   "trend": [
+    {
+     "m": "Nov 25",
+     "p": 3.4
+    },
+    {
+     "m": "Dec 25",
+     "p": 3.4
+    },
+    {
+     "m": "Jan 26",
+     "p": 3.6
+    },
+    {
+     "m": "Feb 26",
+     "p": 3.6
+    },
+    {
+     "m": "Mar 26",
+     "p": 6.6
+    },
+    {
+     "m": "Apr 26",
+     "p": 3.6
+    },
+    {
+     "m": "May 26",
+     "p": 6.6
+    },
+    {
+     "m": "Jun 26",
+     "p": 6.6
+    },
+    {
+     "m": "Jul 26",
+     "p": 9.3
+    },
+    {
+     "m": "Aug 26",
+     "p": 9.3
+    }
+   ]
+  },
+  {
+   "name": "Arunachal Pradesh",
+   "lat": 28.2,
+   "lon": 94.7,
+   "prob": 6.6,
+   "level": "MODERATE",
+   "delta": -2.6,
+   "events": 17,
+   "affected": 14247020.48751167,
+   "displaced_est": 765101.0243755836,
+   "dominant_hazard": "flood",
+   "drivers": [
+    {
+     "label": "Latitude",
+     "z": 0.798966009989086
+    },
+    {
+     "label": "6-month rainfall anomaly",
+     "z": 1.09908967795961
+    },
+    {
+     "label": "3-month temperature anomaly",
+     "z": 0.3986286063368345
+    }
+   ],
+   "trend": [
+    {
+     "m": "Nov 25",
+     "p": 0.1
+    },
+    {
+     "m": "Dec 25",
+     "p": 0.1
+    },
+    {
+     "m": "Jan 26",
+     "p": 0.1
+    },
+    {
+     "m": "Feb 26",
+     "p": 0.1
+    },
+    {
+     "m": "Mar 26",
+     "p": 0.1
+    },
+    {
+     "m": "Apr 26",
+     "p": 6.6
+    },
+    {
+     "m": "May 26",
+     "p": 6.6
+    },
+    {
+     "m": "Jun 26",
+     "p": 3.6
+    },
+    {
+     "m": "Jul 26",
+     "p": 9.3
+    },
+    {
+     "m": "Aug 26",
+     "p": 6.6
+    }
+   ]
+  },
+  {
+   "name": "Delhi",
+   "lat": 28.6,
+   "lon": 77.2,
+   "prob": 6.6,
+   "level": "MODERATE",
+   "delta": 0.0,
+   "events": 25,
+   "affected": 26994572.609523807,
+   "displaced_est": 1349728.6304761905,
+   "dominant_hazard": "heat",
+   "drivers": [
+    {
+     "label": "Latitude",
+     "z": 0.868542150191329
+    },
+    {
+     "label": "Months since last disaster",
+     "z": 0.7397215571737884
+    },
+    {
+     "label": "6-month rainfall anomaly",
+     "z": 0.619091112775811
+    }
+   ],
+   "trend": [
+    {
+     "m": "Nov 25",
+     "p": 0.1
+    },
+    {
+     "m": "Dec 25",
+     "p": 0.1
+    },
+    {
+     "m": "Jan 26",
+     "p": 0.1
+    },
+    {
+     "m": "Feb 26",
+     "p": 1.3
+    },
+    {
+     "m": "Mar 26",
+     "p": 9.3
+    },
+    {
+     "m": "Apr 26",
+     "p": 20.4
+    },
+    {
+     "m": "May 26",
+     "p": 20.4
+    },
+    {
+     "m": "Jun 26",
+     "p": 9.3
+    },
+    {
+     "m": "Jul 26",
+     "p": 6.6
+    },
+    {
+     "m": "Aug 26",
+     "p": 6.6
+    }
+   ]
+  },
+  {
+   "name": "Gujarat",
+   "lat": 22.3,
+   "lon": 71.2,
+   "prob": 6.6,
+   "level": "MODERATE",
+   "delta": 0.0,
+   "events": 44,
+   "affected": 81057862.78977591,
+   "displaced_est": 6347393.139488796,
+   "dominant_hazard": "flood",
+   "drivers": [
+    {
+     "label": "3-month temperature anomaly",
+     "z": 1.468929075025436
+    },
+    {
+     "label": "Last-month temperature anomaly",
+     "z": 0.8233243059756723
+    }
+   ],
+   "trend": [
+    {
+     "m": "Nov 25",
+     "p": 3.4
+    },
+    {
+     "m": "Dec 25",
+     "p": 1.3
+    },
+    {
+     "m": "Jan 26",
+     "p": 1.3
+    },
+    {
+     "m": "Feb 26",
+     "p": 6.6
+    },
+    {
+     "m": "Mar 26",
+     "p": 18.2
+    },
+    {
+     "m": "Apr 26",
+     "p": 41.2
+    },
+    {
+     "m": "May 26",
+     "p": 41.2
+    },
+    {
+     "m": "Jun 26",
+     "p": 20.4
+    },
+    {
+     "m": "Jul 26",
+     "p": 6.6
+    },
+    {
+     "m": "Aug 26",
+     "p": 6.6
+    }
+   ]
+  },
+  {
+   "name": "Himachal Pradesh",
+   "lat": 31.9,
+   "lon": 77.2,
+   "prob": 6.6,
+   "level": "MODERATE",
+   "delta": 3.1,
+   "events": 39,
+   "affected": 55210760.48214286,
+   "displaced_est": 3592957.4288690477,
+   "dominant_hazard": "flood",
+   "drivers": [
+    {
+     "label": "Latitude",
+     "z": 1.44254530685983
+    },
+    {
+     "label": "6-month rainfall anomaly",
+     "z": 0.7540763369490572
+    },
+    {
+     "label": "3-month temperature anomaly",
+     "z": 0.5421691811581775
+    }
+   ],
+   "trend": [
+    {
+     "m": "Nov 25",
+     "p": 0.1
+    },
+    {
+     "m": "Dec 25",
+     "p": 0.1
+    },
+    {
+     "m": "Jan 26",
+     "p": 0.1
+    },
+    {
+     "m": "Feb 26",
+     "p": 0.1
+    },
+    {
+     "m": "Mar 26",
+     "p": 3.6
+    },
+    {
+     "m": "Apr 26",
+     "p": 10.8
+    },
+    {
+     "m": "May 26",
+     "p": 9.3
+    },
+    {
+     "m": "Jun 26",
+     "p": 6.6
+    },
+    {
+     "m": "Jul 26",
+     "p": 3.6
+    },
+    {
+     "m": "Aug 26",
+     "p": 6.6
+    }
+   ]
+  },
+  {
+   "name": "Jharkhand",
+   "lat": 23.6,
+   "lon": 85.3,
+   "prob": 6.6,
+   "level": "MODERATE",
+   "delta": -4.1,
+   "events": 19,
+   "affected": 39012538.177871145,
+   "displaced_est": 1950626.9088935575,
+   "dominant_hazard": "flood",
+   "drivers": [
+    {
+     "label": "Months since last disaster",
+     "z": 1.7826587266101694
+    },
+    {
+     "label": "6-month rainfall anomaly",
+     "z": 1.5489080019183645
+    },
+    {
+     "label": "3-month temperature anomaly",
+     "z": 0.6051046752361361
+    }
+   ],
+   "trend": [
+    {
+     "m": "Nov 25",
+     "p": 1.3
+    },
+    {
+     "m": "Dec 25",
+     "p": 0.1
+    },
+    {
+     "m": "Jan 26",
+     "p": 0.1
+    },
+    {
+     "m": "Feb 26",
+     "p": 0.1
+    },
+    {
+     "m": "Mar 26",
+     "p": 6.6
+    },
+    {
+     "m": "Apr 26",
+     "p": 9.3
+    },
+    {
+     "m": "May 26",
+     "p": 6.6
+    },
+    {
+     "m": "Jun 26",
+     "p": 12.9
+    },
+    {
+     "m": "Jul 26",
+     "p": 10.8
+    },
+    {
+     "m": "Aug 26",
+     "p": 6.6
+    }
+   ]
+  },
+  {
+   "name": "Madhya Pradesh",
+   "lat": 23.5,
+   "lon": 78.0,
+   "prob": 6.6,
+   "level": "MODERATE",
+   "delta": -2.6,
+   "events": 31,
+   "affected": 63711867.987791784,
+   "displaced_est": 3685793.399389589,
+   "dominant_hazard": "flood",
+   "drivers": [
+    {
+     "label": "3-month temperature anomaly",
+     "z": 0.2654118349604588
+    },
+    {
+     "label": "Last-month temperature anomaly",
+     "z": 0.21568607487084263
+    }
+   ],
+   "trend": [
+    {
+     "m": "Nov 25",
+     "p": 9.3
+    },
+    {
+     "m": "Dec 25",
+     "p": 6.6
+    },
+    {
+     "m": "Jan 26",
+     "p": 3.6
+    },
+    {
+     "m": "Feb 26",
+     "p": 6.6
+    },
+    {
+     "m": "Mar 26",
+     "p": 18.2
+    },
+    {
+     "m": "Apr 26",
+     "p": 25.3
+    },
+    {
+     "m": "May 26",
+     "p": 28.0
+    },
+    {
+     "m": "Jun 26",
+     "p": 18.2
+    },
+    {
+     "m": "Jul 26",
+     "p": 9.3
+    },
+    {
+     "m": "Aug 26",
+     "p": 6.6
+    }
+   ]
+  },
+  {
+   "name": "Maharashtra",
+   "lat": 19.7,
+   "lon": 75.7,
+   "prob": 6.6,
+   "level": "MODERATE",
+   "delta": -2.6,
+   "events": 59,
+   "affected": 81741280.97588703,
+   "displaced_est": 4618892.620222922,
+   "dominant_hazard": "flood",
+   "drivers": [
+    {
+     "label": "3-month temperature anomaly",
+     "z": 1.813386747660332
+    },
+    {
+     "label": "Last-month temperature anomaly",
+     "z": 1.2691975493814516
+    },
+    {
+     "label": "Floods in last 12 months",
+     "z": 0.45346538589570795
+    }
+   ],
+   "trend": [
+    {
+     "m": "Nov 25",
+     "p": 6.1
+    },
+    {
+     "m": "Dec 25",
+     "p": 3.6
+    },
+    {
+     "m": "Jan 26",
+     "p": 0.1
+    },
+    {
+     "m": "Feb 26",
+     "p": 6.6
+    },
+    {
+     "m": "Mar 26",
+     "p": 6.6
+    },
+    {
+     "m": "Apr 26",
+     "p": 25.3
+    },
+    {
+     "m": "May 26",
+     "p": 20.4
+    },
+    {
+     "m": "Jun 26",
+     "p": 6.6
+    },
+    {
+     "m": "Jul 26",
+     "p": 9.3
+    },
+    {
+     "m": "Aug 26",
+     "p": 6.6
+    }
+   ]
+  },
+  {
+   "name": "Meghalaya",
+   "lat": 25.5,
+   "lon": 91.4,
+   "prob": 6.6,
+   "level": "MODERATE",
+   "delta": -2.6,
+   "events": 13,
+   "affected": 11043197.327380953,
+   "displaced_est": 925493.1997023809,
+   "dominant_hazard": "flood",
+   "drivers": [
+    {
+     "label": "6-month rainfall anomaly",
+     "z": 1.204186547554207
+    },
+    {
+     "label": "Latitude",
+     "z": 0.32932706362394853
+    },
+    {
+     "label": "Longitude",
+     "z": 1.2657218059779467
+    }
+   ],
+   "trend": [
+    {
+     "m": "Nov 25",
+     "p": 3.6
+    },
+    {
+     "m": "Dec 25",
+     "p": 3.6
+    },
+    {
+     "m": "Jan 26",
+     "p": 3.4
+    },
+    {
+     "m": "Feb 26",
+     "p": 6.6
+    },
+    {
+     "m": "Mar 26",
+     "p": 20.4
+    },
+    {
+     "m": "Apr 26",
+     "p": 25.3
+    },
+    {
+     "m": "May 26",
+     "p": 18.2
+    },
+    {
+     "m": "Jun 26",
+     "p": 20.4
+    },
+    {
+     "m": "Jul 26",
+     "p": 9.3
+    },
+    {
+     "m": "Aug 26",
+     "p": 6.6
+    }
+   ]
+  },
+  {
+   "name": "Telangana",
+   "lat": 17.9,
+   "lon": 79.0,
+   "prob": 6.6,
+   "level": "MODERATE",
+   "delta": -2.6,
+   "events": 9,
+   "affected": 3278579.166666667,
+   "displaced_est": 289928.9583333333,
+   "dominant_hazard": "cyclone",
+   "drivers": [
+    {
+     "label": "3-month temperature anomaly",
+     "z": 1.1695387751214459
+    },
+    {
+     "label": "Cyclones in last 12 months",
+     "z": 1.1581844658904854
+    },
+    {
+     "label": "Last-month temperature anomaly",
+     "z": 0.5790908931751433
+    }
+   ],
+   "trend": [
+    {
+     "m": "Nov 25",
+     "p": 0.1
+    },
+    {
+     "m": "Dec 25",
+     "p": 1.3
+    },
+    {
+     "m": "Jan 26",
+     "p": 0.1
+    },
+    {
+     "m": "Feb 26",
+     "p": 0.1
+    },
+    {
+     "m": "Mar 26",
+     "p": 0.1
+    },
+    {
+     "m": "Apr 26",
+     "p": 6.6
+    },
+    {
+     "m": "May 26",
+     "p": 6.6
+    },
+    {
+     "m": "Jun 26",
+     "p": 6.6
+    },
+    {
+     "m": "Jul 26",
+     "p": 9.3
+    },
+    {
+     "m": "Aug 26",
+     "p": 6.6
+    }
+   ]
+  },
+  {
+   "name": "Uttarakhand",
+   "lat": 30.1,
+   "lon": 79.2,
+   "prob": 6.6,
+   "level": "MODERATE",
+   "delta": 0.0,
+   "events": 39,
+   "affected": 2807364.9504901962,
+   "displaced_est": 141868.24752450982,
+   "dominant_hazard": "flood",
+   "drivers": [
+    {
+     "label": "Latitude",
+     "z": 1.1294526759497387
+    },
+    {
+     "label": "6-month rainfall anomaly",
+     "z": 0.6895108220995335
+    },
+    {
+     "label": "Last-month temperature anomaly",
+     "z": 0.48257564841352685
+    }
+   ],
+   "trend": [
+    {
+     "m": "Nov 25",
+     "p": 0.1
+    },
+    {
+     "m": "Dec 25",
+     "p": 0.1
+    },
+    {
+     "m": "Jan 26",
+     "p": 0.1
+    },
+    {
+     "m": "Feb 26",
+     "p": 0.1
+    },
+    {
+     "m": "Mar 26",
+     "p": 1.3
+    },
+    {
+     "m": "Apr 26",
+     "p": 9.3
+    },
+    {
+     "m": "May 26",
+     "p": 6.6
+    },
+    {
+     "m": "Jun 26",
+     "p": 6.6
+    },
+    {
+     "m": "Jul 26",
+     "p": 6.6
+    },
+    {
+     "m": "Aug 26",
+     "p": 6.6
+    }
+   ]
+  },
+  {
+   "name": "Jammu and Kashmir",
+   "lat": 33.8,
+   "lon": 76.6,
+   "prob": 3.6,
+   "level": "LOW",
+   "delta": -7.2,
+   "events": 20,
+   "affected": 540104.0,
+   "displaced_est": 179102.2,
+   "dominant_hazard": "flood",
+   "drivers": [
+    {
+     "label": "Latitude",
+     "z": 1.7730319728204822
+    },
+    {
+     "label": "6-month rainfall anomaly",
+     "z": 1.6449288617475857
+    },
+    {
+     "label": "3-month temperature anomaly",
+     "z": 0.7931170187434856
+    }
+   ],
+   "trend": [
+    {
+     "m": "Nov 25",
+     "p": 0.1
+    },
+    {
+     "m": "Dec 25",
+     "p": 0.1
+    },
+    {
+     "m": "Jan 26",
+     "p": 0.1
+    },
+    {
+     "m": "Feb 26",
+     "p": 0.1
+    },
+    {
+     "m": "Mar 26",
+     "p": 6.6
+    },
+    {
+     "m": "Apr 26",
+     "p": 9.3
+    },
+    {
+     "m": "May 26",
+     "p": 10.8
+    },
+    {
+     "m": "Jun 26",
+     "p": 9.3
+    },
+    {
+     "m": "Jul 26",
+     "p": 10.8
+    },
+    {
+     "m": "Aug 26",
+     "p": 3.6
+    }
+   ]
+  },
+  {
+   "name": "Rajasthan",
+   "lat": 26.6,
+   "lon": 73.8,
+   "prob": 3.6,
+   "level": "LOW",
+   "delta": -3.1,
+   "events": 40,
+   "affected": 61079680.12112512,
+   "displaced_est": 3572734.006056256,
+   "dominant_hazard": "flood",
+   "drivers": [
+    {
+     "label": "Latitude",
+     "z": 0.5206614491801159
+    },
+    {
+     "label": "6-month rainfall anomaly",
+     "z": 0.8093719334371436
+    },
+    {
+     "label": "3-month temperature anomaly",
+     "z": 0.5072270771906058
+    }
+   ],
+   "trend": [
+    {
+     "m": "Nov 25",
+     "p": 1.3
+    },
+    {
+     "m": "Dec 25",
+     "p": 0.1
+    },
+    {
+     "m": "Jan 26",
+     "p": 6.6
+    },
+    {
+     "m": "Feb 26",
+     "p": 6.6
+    },
+    {
+     "m": "Mar 26",
+     "p": 10.8
+    },
+    {
+     "m": "Apr 26",
+     "p": 41.2
+    },
+    {
+     "m": "May 26",
+     "p": 41.2
+    },
+    {
+     "m": "Jun 26",
+     "p": 20.4
+    },
+    {
+     "m": "Jul 26",
+     "p": 6.6
+    },
+    {
+     "m": "Aug 26",
+     "p": 3.6
     }
    ]
   },
@@ -782,7 +1454,7 @@
    "name": "Goa",
    "lat": 15.3,
    "lon": 74.1,
-   "prob": 1.5,
+   "prob": 1.3,
    "level": "LOW",
    "delta": 0.0,
    "events": 6,
@@ -791,602 +1463,58 @@
    "dominant_hazard": "flood",
    "drivers": [
     {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
-    },
-    {
      "label": "Months since last disaster",
-     "z": 1.0312910510745292
+     "z": 2.4413558862541995
     },
     {
-     "label": "6-month rainfall anomaly",
-     "z": 0.3698466857115795
+     "label": "3-month temperature anomaly",
+     "z": 1.0025711078672987
+    },
+    {
+     "label": "Last-month temperature anomaly",
+     "z": 0.9030739917880856
     }
    ],
    "trend": [
     {
-     "m": "Mar 25",
-     "p": 1.5
-    },
-    {
-     "m": "Apr 25",
-     "p": 7.9
-    },
-    {
-     "m": "May 25",
-     "p": 13.6
-    },
-    {
-     "m": "Jun 25",
-     "p": 7.9
-    },
-    {
-     "m": "Jul 25",
-     "p": 2.5
-    },
-    {
-     "m": "Aug 25",
-     "p": 2.5
-    },
-    {
-     "m": "Sep 25",
-     "p": 1.5
-    },
-    {
-     "m": "Oct 25",
-     "p": 0.1
-    },
-    {
      "m": "Nov 25",
-     "p": 1.5
-    },
-    {
-     "m": "Dec 25",
-     "p": 1.5
-    }
-   ]
-  },
-  {
-   "name": "Gujarat",
-   "lat": 22.3,
-   "lon": 71.2,
-   "prob": 1.5,
-   "level": "LOW",
-   "delta": 0.0,
-   "events": 44,
-   "affected": 81057862.78977591,
-   "displaced_est": 6347393.139488796,
-   "dominant_hazard": "flood",
-   "drivers": [
-    {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
-    },
-    {
-     "label": "6-month rainfall anomaly",
-     "z": 0.9376189127681618
-    },
-    {
-     "label": "Cyclones in last 12 months",
-     "z": 3.3034655348768838
-    }
-   ],
-   "trend": [
-    {
-     "m": "Mar 25",
-     "p": 10.5
-    },
-    {
-     "m": "Apr 25",
-     "p": 39.3
-    },
-    {
-     "m": "May 25",
-     "p": 41.7
-    },
-    {
-     "m": "Jun 25",
-     "p": 31.2
-    },
-    {
-     "m": "Jul 25",
-     "p": 10.5
-    },
-    {
-     "m": "Aug 25",
-     "p": 7.9
-    },
-    {
-     "m": "Sep 25",
-     "p": 2.5
-    },
-    {
-     "m": "Oct 25",
-     "p": 2.5
-    },
-    {
-     "m": "Nov 25",
-     "p": 1.5
-    },
-    {
-     "m": "Dec 25",
-     "p": 1.5
-    }
-   ]
-  },
-  {
-   "name": "Madhya Pradesh",
-   "lat": 23.5,
-   "lon": 78.0,
-   "prob": 1.5,
-   "level": "LOW",
-   "delta": -1.0,
-   "events": 31,
-   "affected": 63711867.987791784,
-   "displaced_est": 3685793.399389589,
-   "dominant_hazard": "flood",
-   "drivers": [
-    {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
-    },
-    {
-     "label": "Cyclones in last 12 months",
-     "z": 1.4709884421746413
-    },
-    {
-     "label": "6-month rainfall anomaly",
-     "z": 0.16532862499957632
-    }
-   ],
-   "trend": [
-    {
-     "m": "Mar 25",
-     "p": 10.5
-    },
-    {
-     "m": "Apr 25",
-     "p": 39.3
-    },
-    {
-     "m": "May 25",
-     "p": 9.6
-    },
-    {
-     "m": "Jun 25",
-     "p": 39.3
-    },
-    {
-     "m": "Jul 25",
-     "p": 10.5
-    },
-    {
-     "m": "Aug 25",
-     "p": 10.5
-    },
-    {
-     "m": "Sep 25",
-     "p": 7.9
-    },
-    {
-     "m": "Oct 25",
-     "p": 2.5
-    },
-    {
-     "m": "Nov 25",
-     "p": 2.5
-    },
-    {
-     "m": "Dec 25",
-     "p": 1.5
-    }
-   ]
-  },
-  {
-   "name": "Maharashtra",
-   "lat": 19.7,
-   "lon": 75.7,
-   "prob": 1.5,
-   "level": "LOW",
-   "delta": -1.0,
-   "events": 58,
-   "affected": 81741280.97588703,
-   "displaced_est": 4618892.620222922,
-   "dominant_hazard": "flood",
-   "drivers": [
-    {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
-    },
-    {
-     "label": "High-impact disasters (3 yrs)",
-     "z": 0.7960212415122805
-    },
-    {
-     "label": "Season (sin)",
-     "z": 0.01237542471897047
-    }
-   ],
-   "trend": [
-    {
-     "m": "Mar 25",
-     "p": 10.5
-    },
-    {
-     "m": "Apr 25",
-     "p": 13.6
-    },
-    {
-     "m": "May 25",
-     "p": 41.7
-    },
-    {
-     "m": "Jun 25",
-     "p": 39.3
-    },
-    {
-     "m": "Jul 25",
-     "p": 10.5
-    },
-    {
-     "m": "Aug 25",
-     "p": 7.9
-    },
-    {
-     "m": "Sep 25",
-     "p": 2.5
-    },
-    {
-     "m": "Oct 25",
-     "p": 2.5
-    },
-    {
-     "m": "Nov 25",
-     "p": 2.5
-    },
-    {
-     "m": "Dec 25",
-     "p": 1.5
-    }
-   ]
-  },
-  {
-   "name": "Meghalaya",
-   "lat": 25.5,
-   "lon": 91.4,
-   "prob": 1.5,
-   "level": "LOW",
-   "delta": 0.0,
-   "events": 13,
-   "affected": 11043197.327380953,
-   "displaced_est": 925493.1997023809,
-   "dominant_hazard": "flood",
-   "drivers": [
-    {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
-    },
-    {
-     "label": "High-impact disasters (3 yrs)",
-     "z": 1.5230305174122027
-    },
-    {
-     "label": "6-month rainfall anomaly",
-     "z": 0.7582314712105923
-    }
-   ],
-   "trend": [
-    {
-     "m": "Mar 25",
-     "p": 7.9
-    },
-    {
-     "m": "Apr 25",
-     "p": 7.9
-    },
-    {
-     "m": "May 25",
-     "p": 10.5
-    },
-    {
-     "m": "Jun 25",
-     "p": 10.5
-    },
-    {
-     "m": "Jul 25",
-     "p": 10.5
-    },
-    {
-     "m": "Aug 25",
-     "p": 10.5
-    },
-    {
-     "m": "Sep 25",
-     "p": 1.5
-    },
-    {
-     "m": "Oct 25",
-     "p": 0.1
-    },
-    {
-     "m": "Nov 25",
-     "p": 1.5
-    },
-    {
-     "m": "Dec 25",
-     "p": 1.5
-    }
-   ]
-  },
-  {
-   "name": "Telangana",
-   "lat": 17.9,
-   "lon": 79.0,
-   "prob": 1.5,
-   "level": "LOW",
-   "delta": -1.0,
-   "events": 9,
-   "affected": 3278579.166666667,
-   "displaced_est": 289928.9583333333,
-   "dominant_hazard": "cyclone",
-   "drivers": [
-    {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
-    },
-    {
-     "label": "6-month rainfall anomaly",
-     "z": 1.4508499761431994
-    },
-    {
-     "label": "High-impact disasters (3 yrs)",
-     "z": 1.5230305174122027
-    }
-   ],
-   "trend": [
-    {
-     "m": "Mar 25",
-     "p": 10.5
-    },
-    {
-     "m": "Apr 25",
-     "p": 13.6
-    },
-    {
-     "m": "May 25",
-     "p": 39.3
-    },
-    {
-     "m": "Jun 25",
-     "p": 10.5
-    },
-    {
-     "m": "Jul 25",
-     "p": 7.9
-    },
-    {
-     "m": "Aug 25",
-     "p": 7.9
-    },
-    {
-     "m": "Sep 25",
-     "p": 2.5
-    },
-    {
-     "m": "Oct 25",
-     "p": 2.5
-    },
-    {
-     "m": "Nov 25",
-     "p": 2.5
-    },
-    {
-     "m": "Dec 25",
-     "p": 1.5
-    }
-   ]
-  },
-  {
-   "name": "Tripura",
-   "lat": 23.8,
-   "lon": 91.7,
-   "prob": 1.5,
-   "level": "LOW",
-   "delta": 0.0,
-   "events": 19,
-   "affected": 12354137.041666666,
-   "displaced_est": 617764.3520833333,
-   "dominant_hazard": "flood",
-   "drivers": [
-    {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
-    },
-    {
-     "label": "High-impact disasters (3 yrs)",
-     "z": 1.5230305174122027
-    },
-    {
-     "label": "6-month rainfall anomaly",
-     "z": 0.6809796760108118
-    }
-   ],
-   "trend": [
-    {
-     "m": "Mar 25",
-     "p": 7.9
-    },
-    {
-     "m": "Apr 25",
-     "p": 10.5
-    },
-    {
-     "m": "May 25",
-     "p": 10.5
-    },
-    {
-     "m": "Jun 25",
-     "p": 13.6
-    },
-    {
-     "m": "Jul 25",
-     "p": 10.5
-    },
-    {
-     "m": "Aug 25",
-     "p": 7.9
-    },
-    {
-     "m": "Sep 25",
-     "p": 2.5
-    },
-    {
-     "m": "Oct 25",
-     "p": 0.1
-    },
-    {
-     "m": "Nov 25",
-     "p": 1.5
-    },
-    {
-     "m": "Dec 25",
-     "p": 1.5
-    }
-   ]
-  },
-  {
-   "name": "Arunachal Pradesh",
-   "lat": 28.2,
-   "lon": 94.7,
-   "prob": 0.1,
-   "level": "LOW",
-   "delta": 0.0,
-   "events": 17,
-   "affected": 14247020.48751167,
-   "displaced_est": 765101.0243755836,
-   "dominant_hazard": "flood",
-   "drivers": [
-    {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
-    },
-    {
-     "label": "Longitude",
-     "z": 1.725923721506393
-    },
-    {
-     "label": "Latitude",
-     "z": 0.7989770991731667
-    }
-   ],
-   "trend": [
-    {
-     "m": "Mar 25",
-     "p": 7.9
-    },
-    {
-     "m": "Apr 25",
-     "p": 7.9
-    },
-    {
-     "m": "May 25",
-     "p": 17.5
-    },
-    {
-     "m": "Jun 25",
-     "p": 31.2
-    },
-    {
-     "m": "Jul 25",
-     "p": 10.5
-    },
-    {
-     "m": "Aug 25",
-     "p": 7.9
-    },
-    {
-     "m": "Sep 25",
-     "p": 2.5
-    },
-    {
-     "m": "Oct 25",
-     "p": 2.5
-    },
-    {
-     "m": "Nov 25",
-     "p": 0.1
+     "p": 3.6
     },
     {
      "m": "Dec 25",
      "p": 0.1
-    }
-   ]
-  },
-  {
-   "name": "Delhi",
-   "lat": 28.6,
-   "lon": 77.2,
-   "prob": 0.1,
-   "level": "LOW",
-   "delta": 0.0,
-   "events": 25,
-   "affected": 26994572.609523807,
-   "displaced_est": 1349728.6304761905,
-   "dominant_hazard": "heat",
-   "drivers": [
-    {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
     },
     {
-     "label": "Latitude",
-     "z": 0.8685542050518174
-    },
-    {
-     "label": "6-month rainfall anomaly",
-     "z": 0.4697275022708194
-    }
-   ],
-   "trend": [
-    {
-     "m": "Mar 25",
-     "p": 7.9
-    },
-    {
-     "m": "Apr 25",
-     "p": 10.5
-    },
-    {
-     "m": "May 25",
-     "p": 7.9
-    },
-    {
-     "m": "Jun 25",
-     "p": 10.5
-    },
-    {
-     "m": "Jul 25",
-     "p": 1.5
-    },
-    {
-     "m": "Aug 25",
-     "p": 2.5
-    },
-    {
-     "m": "Sep 25",
+     "m": "Jan 26",
      "p": 0.1
     },
     {
-     "m": "Oct 25",
+     "m": "Feb 26",
      "p": 0.1
     },
     {
-     "m": "Nov 25",
-     "p": 0.1
+     "m": "Mar 26",
+     "p": 6.6
     },
     {
-     "m": "Dec 25",
-     "p": 0.1
+     "m": "Apr 26",
+     "p": 6.6
+    },
+    {
+     "m": "May 26",
+     "p": 12.9
+    },
+    {
+     "m": "Jun 26",
+     "p": 9.3
+    },
+    {
+     "m": "Jul 26",
+     "p": 1.3
+    },
+    {
+     "m": "Aug 26",
+     "p": 1.3
     }
    ]
   },
@@ -1394,60 +1522,28 @@
    "name": "Haryana",
    "lat": 29.1,
    "lon": 76.1,
-   "prob": 0.1,
+   "prob": 1.3,
    "level": "LOW",
-   "delta": 0.0,
+   "delta": -5.3,
    "events": 22,
    "affected": 19313433.525490195,
    "displaced_est": 965671.6762745098,
    "dominant_hazard": "heat",
    "drivers": [
     {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
+     "label": "Latitude",
+     "z": 0.9555123254441322
+    },
+    {
+     "label": "Months since last disaster",
+     "z": 0.7397215571737884
     },
     {
      "label": "6-month rainfall anomaly",
-     "z": 1.046650385808396
-    },
-    {
-     "label": "Latitude",
-     "z": 0.9555255874001302
+     "z": 0.08343943977394352
     }
    ],
    "trend": [
-    {
-     "m": "Mar 25",
-     "p": 2.5
-    },
-    {
-     "m": "Apr 25",
-     "p": 7.9
-    },
-    {
-     "m": "May 25",
-     "p": 2.5
-    },
-    {
-     "m": "Jun 25",
-     "p": 2.5
-    },
-    {
-     "m": "Jul 25",
-     "p": 7.9
-    },
-    {
-     "m": "Aug 25",
-     "p": 0.1
-    },
-    {
-     "m": "Sep 25",
-     "p": 0.1
-    },
-    {
-     "m": "Oct 25",
-     "p": 0.1
-    },
     {
      "m": "Nov 25",
      "p": 0.1
@@ -1455,142 +1551,38 @@
     {
      "m": "Dec 25",
      "p": 0.1
-    }
-   ]
-  },
-  {
-   "name": "Himachal Pradesh",
-   "lat": 31.9,
-   "lon": 77.2,
-   "prob": 0.1,
-   "level": "LOW",
-   "delta": 0.0,
-   "events": 39,
-   "affected": 55210760.48214286,
-   "displaced_est": 3592957.4288690477,
-   "dominant_hazard": "flood",
-   "drivers": [
-    {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
     },
     {
-     "label": "6-month rainfall anomaly",
-     "z": 2.0424803351927507
-    },
-    {
-     "label": "Latitude",
-     "z": 1.4425653285506816
-    }
-   ],
-   "trend": [
-    {
-     "m": "Mar 25",
-     "p": 7.9
-    },
-    {
-     "m": "Apr 25",
-     "p": 7.9
-    },
-    {
-     "m": "May 25",
-     "p": 7.9
-    },
-    {
-     "m": "Jun 25",
-     "p": 2.5
-    },
-    {
-     "m": "Jul 25",
-     "p": 2.5
-    },
-    {
-     "m": "Aug 25",
-     "p": 2.5
-    },
-    {
-     "m": "Sep 25",
+     "m": "Jan 26",
      "p": 0.1
     },
     {
-     "m": "Oct 25",
-     "p": 0.1
+     "m": "Feb 26",
+     "p": 1.3
     },
     {
-     "m": "Nov 25",
-     "p": 0.1
+     "m": "Mar 26",
+     "p": 3.6
     },
     {
-     "m": "Dec 25",
-     "p": 0.1
-    }
-   ]
-  },
-  {
-   "name": "Jammu and Kashmir",
-   "lat": 33.8,
-   "lon": 76.6,
-   "prob": 0.1,
-   "level": "LOW",
-   "delta": 0.0,
-   "events": 20,
-   "affected": 540104.0,
-   "displaced_est": 179102.2,
-   "dominant_hazard": "flood",
-   "drivers": [
-    {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
+     "m": "Apr 26",
+     "p": 18.2
     },
     {
-     "label": "6-month rainfall anomaly",
-     "z": 2.047788929420971
+     "m": "May 26",
+     "p": 20.4
     },
     {
-     "label": "Latitude",
-     "z": 1.77305658147427
-    }
-   ],
-   "trend": [
-    {
-     "m": "Mar 25",
-     "p": 0.1
+     "m": "Jun 26",
+     "p": 9.3
     },
     {
-     "m": "Apr 25",
-     "p": 0.1
+     "m": "Jul 26",
+     "p": 6.6
     },
     {
-     "m": "May 25",
-     "p": 0.1
-    },
-    {
-     "m": "Jun 25",
-     "p": 1.5
-    },
-    {
-     "m": "Jul 25",
-     "p": 0.1
-    },
-    {
-     "m": "Aug 25",
-     "p": 2.5
-    },
-    {
-     "m": "Sep 25",
-     "p": 0.1
-    },
-    {
-     "m": "Oct 25",
-     "p": 0.1
-    },
-    {
-     "m": "Nov 25",
-     "p": 0.1
-    },
-    {
-     "m": "Dec 25",
-     "p": 0.1
+     "m": "Aug 26",
+     "p": 1.3
     }
    ]
   },
@@ -1598,67 +1590,67 @@
    "name": "Karnataka",
    "lat": 15.3,
    "lon": 75.7,
-   "prob": 0.1,
+   "prob": 1.3,
    "level": "LOW",
-   "delta": -1.4,
+   "delta": -5.3,
    "events": 23,
    "affected": 28814579.22787115,
    "displaced_est": 1940728.9613935575,
    "dominant_hazard": "flood",
    "drivers": [
     {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
+     "label": "Months since last disaster",
+     "z": 1.233744426906811
+    },
+    {
+     "label": "3-month temperature anomaly",
+     "z": 0.9074729953646365
     },
     {
      "label": "6-month rainfall anomaly",
-     "z": 1.668652356444954
-    },
-    {
-     "label": "Months since last disaster",
-     "z": 0.08295758590989363
+     "z": 0.15566036132012884
     }
    ],
    "trend": [
     {
-     "m": "Mar 25",
-     "p": 7.9
-    },
-    {
-     "m": "Apr 25",
-     "p": 13.6
-    },
-    {
-     "m": "May 25",
-     "p": 99.9
-    },
-    {
-     "m": "Jun 25",
-     "p": 41.7
-    },
-    {
-     "m": "Jul 25",
-     "p": 10.5
-    },
-    {
-     "m": "Aug 25",
-     "p": 10.5
-    },
-    {
-     "m": "Sep 25",
-     "p": 10.5
-    },
-    {
-     "m": "Oct 25",
-     "p": 10.5
-    },
-    {
      "m": "Nov 25",
-     "p": 1.5
+     "p": 6.6
     },
     {
      "m": "Dec 25",
      "p": 0.1
+    },
+    {
+     "m": "Jan 26",
+     "p": 0.1
+    },
+    {
+     "m": "Feb 26",
+     "p": 6.6
+    },
+    {
+     "m": "Mar 26",
+     "p": 10.8
+    },
+    {
+     "m": "Apr 26",
+     "p": 25.3
+    },
+    {
+     "m": "May 26",
+     "p": 20.4
+    },
+    {
+     "m": "Jun 26",
+     "p": 10.8
+    },
+    {
+     "m": "Jul 26",
+     "p": 6.6
+    },
+    {
+     "m": "Aug 26",
+     "p": 1.3
     }
    ]
   },
@@ -1666,60 +1658,28 @@
    "name": "Manipur",
    "lat": 24.7,
    "lon": 93.9,
-   "prob": 0.1,
+   "prob": 1.3,
    "level": "LOW",
-   "delta": 0.0,
+   "delta": -5.3,
    "events": 15,
    "affected": 12509197.625,
    "displaced_est": 630459.8812500001,
    "dominant_hazard": "flood",
    "drivers": [
     {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
+     "label": "6-month rainfall anomaly",
+     "z": 0.669575185989494
     },
     {
-     "label": "6-month rainfall anomaly",
-     "z": 1.0188793979798725
+     "label": "Latitude",
+     "z": 0.19017478321946318
     },
     {
      "label": "Longitude",
-     "z": 1.6143638795560742
+     "z": 1.61434147343423
     }
    ],
    "trend": [
-    {
-     "m": "Mar 25",
-     "p": 2.5
-    },
-    {
-     "m": "Apr 25",
-     "p": 10.5
-    },
-    {
-     "m": "May 25",
-     "p": 17.5
-    },
-    {
-     "m": "Jun 25",
-     "p": 7.9
-    },
-    {
-     "m": "Jul 25",
-     "p": 7.9
-    },
-    {
-     "m": "Aug 25",
-     "p": 7.9
-    },
-    {
-     "m": "Sep 25",
-     "p": 0.1
-    },
-    {
-     "m": "Oct 25",
-     "p": 0.1
-    },
     {
      "m": "Nov 25",
      "p": 0.1
@@ -1727,6 +1687,242 @@
     {
      "m": "Dec 25",
      "p": 0.1
+    },
+    {
+     "m": "Jan 26",
+     "p": 0.1
+    },
+    {
+     "m": "Feb 26",
+     "p": 1.3
+    },
+    {
+     "m": "Mar 26",
+     "p": 6.6
+    },
+    {
+     "m": "Apr 26",
+     "p": 18.2
+    },
+    {
+     "m": "May 26",
+     "p": 20.4
+    },
+    {
+     "m": "Jun 26",
+     "p": 18.2
+    },
+    {
+     "m": "Jul 26",
+     "p": 6.6
+    },
+    {
+     "m": "Aug 26",
+     "p": 1.3
+    }
+   ]
+  },
+  {
+   "name": "Punjab",
+   "lat": 31.0,
+   "lon": 75.4,
+   "prob": 1.3,
+   "level": "LOW",
+   "delta": -2.2,
+   "events": 27,
+   "affected": 23612766.41993464,
+   "displaced_est": 1380638.320996732,
+   "dominant_hazard": "flood",
+   "drivers": [
+    {
+     "label": "Latitude",
+     "z": 1.2859989914047845
+    },
+    {
+     "label": "6-month rainfall anomaly",
+     "z": 1.1239892876901765
+    },
+    {
+     "label": "Very wet months (last 3)",
+     "z": 0.763369256439803
+    }
+   ],
+   "trend": [
+    {
+     "m": "Nov 25",
+     "p": 0.1
+    },
+    {
+     "m": "Dec 25",
+     "p": 0.1
+    },
+    {
+     "m": "Jan 26",
+     "p": 0.1
+    },
+    {
+     "m": "Feb 26",
+     "p": 0.1
+    },
+    {
+     "m": "Mar 26",
+     "p": 3.6
+    },
+    {
+     "m": "Apr 26",
+     "p": 9.3
+    },
+    {
+     "m": "May 26",
+     "p": 6.6
+    },
+    {
+     "m": "Jun 26",
+     "p": 6.6
+    },
+    {
+     "m": "Jul 26",
+     "p": 3.6
+    },
+    {
+     "m": "Aug 26",
+     "p": 1.3
+    }
+   ]
+  },
+  {
+   "name": "Tamil Nadu",
+   "lat": 11.1,
+   "lon": 78.4,
+   "prob": 1.3,
+   "level": "LOW",
+   "delta": -2.2,
+   "events": 33,
+   "affected": 52036854.7254902,
+   "displaced_est": 2851842.7362745097,
+   "dominant_hazard": "flood",
+   "drivers": [
+    {
+     "label": "3-month temperature anomaly",
+     "z": 1.9942518426288605
+    },
+    {
+     "label": "Cyclones in last 12 months",
+     "z": 1.1581844658904854
+    },
+    {
+     "label": "Last-month temperature anomaly",
+     "z": 1.6036024819357901
+    }
+   ],
+   "trend": [
+    {
+     "m": "Nov 25",
+     "p": 6.6
+    },
+    {
+     "m": "Dec 25",
+     "p": 1.3
+    },
+    {
+     "m": "Jan 26",
+     "p": 1.3
+    },
+    {
+     "m": "Feb 26",
+     "p": 6.6
+    },
+    {
+     "m": "Mar 26",
+     "p": 6.6
+    },
+    {
+     "m": "Apr 26",
+     "p": 10.8
+    },
+    {
+     "m": "May 26",
+     "p": 6.6
+    },
+    {
+     "m": "Jun 26",
+     "p": 6.6
+    },
+    {
+     "m": "Jul 26",
+     "p": 3.6
+    },
+    {
+     "m": "Aug 26",
+     "p": 1.3
+    }
+   ]
+  },
+  {
+   "name": "Tripura",
+   "lat": 23.8,
+   "lon": 91.7,
+   "prob": 1.3,
+   "level": "LOW",
+   "delta": -5.3,
+   "events": 19,
+   "affected": 12354137.041666666,
+   "displaced_est": 617764.3520833333,
+   "dominant_hazard": "flood",
+   "drivers": [
+    {
+     "label": "6-month rainfall anomaly",
+     "z": 1.3222055200184522
+    },
+    {
+     "label": "Longitude",
+     "z": 1.3075561660727002
+    },
+    {
+     "label": "Latitude",
+     "z": 0.03362846776441757
+    }
+   ],
+   "trend": [
+    {
+     "m": "Nov 25",
+     "p": 1.3
+    },
+    {
+     "m": "Dec 25",
+     "p": 1.3
+    },
+    {
+     "m": "Jan 26",
+     "p": 0.1
+    },
+    {
+     "m": "Feb 26",
+     "p": 6.6
+    },
+    {
+     "m": "Mar 26",
+     "p": 12.9
+    },
+    {
+     "m": "Apr 26",
+     "p": 25.3
+    },
+    {
+     "m": "May 26",
+     "p": 18.2
+    },
+    {
+     "m": "Jun 26",
+     "p": 18.2
+    },
+    {
+     "m": "Jul 26",
+     "p": 6.6
+    },
+    {
+     "m": "Aug 26",
+     "p": 1.3
     }
    ]
   },
@@ -1736,200 +1932,132 @@
    "lon": 92.8,
    "prob": 0.1,
    "level": "LOW",
-   "delta": 0.0,
+   "delta": -1.2,
    "events": 8,
    "affected": 554750.0416666667,
    "displaced_est": 27737.502083333333,
    "dominant_hazard": "cyclone",
    "drivers": [
     {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
-    },
-    {
      "label": "6-month rainfall anomaly",
-     "z": 1.2058469347444998
+     "z": 0.779939701867196
     },
     {
-     "label": "High-impact disasters (3 yrs)",
-     "z": 0.7960212415122805
-    }
-   ],
-   "trend": [
-    {
-     "m": "Mar 25",
-     "p": 7.9
-    },
-    {
-     "m": "Apr 25",
-     "p": 10.5
-    },
-    {
-     "m": "May 25",
-     "p": 10.5
-    },
-    {
-     "m": "Jun 25",
-     "p": 10.5
-    },
-    {
-     "m": "Jul 25",
-     "p": 7.9
-    },
-    {
-     "m": "Aug 25",
-     "p": 7.9
-    },
-    {
-     "m": "Sep 25",
-     "p": 1.5
-    },
-    {
-     "m": "Oct 25",
-     "p": 0.1
-    },
-    {
-     "m": "Nov 25",
-     "p": 0.1
-    },
-    {
-     "m": "Dec 25",
-     "p": 0.1
-    }
-   ]
-  },
-  {
-   "name": "Punjab",
-   "lat": 31.0,
-   "lon": 75.4,
-   "prob": 0.1,
-   "level": "LOW",
-   "delta": 0.0,
-   "events": 27,
-   "affected": 23612766.41993464,
-   "displaced_est": 1380638.320996732,
-   "dominant_hazard": "flood",
-   "drivers": [
-    {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
-    },
-    {
-     "label": "6-month rainfall anomaly",
-     "z": 2.3949804129155576
-    },
-    {
-     "label": "Latitude",
-     "z": 1.2860168403237187
-    }
-   ],
-   "trend": [
-    {
-     "m": "Mar 25",
-     "p": 7.9
-    },
-    {
-     "m": "Apr 25",
-     "p": 10.5
-    },
-    {
-     "m": "May 25",
-     "p": 10.5
-    },
-    {
-     "m": "Jun 25",
-     "p": 10.5
-    },
-    {
-     "m": "Jul 25",
-     "p": 7.9
-    },
-    {
-     "m": "Aug 25",
-     "p": 1.5
-    },
-    {
-     "m": "Sep 25",
-     "p": 0.1
-    },
-    {
-     "m": "Oct 25",
-     "p": 0.1
-    },
-    {
-     "m": "Nov 25",
-     "p": 0.1
-    },
-    {
-     "m": "Dec 25",
-     "p": 0.1
-    }
-   ]
-  },
-  {
-   "name": "Rajasthan",
-   "lat": 26.6,
-   "lon": 73.8,
-   "prob": 0.1,
-   "level": "LOW",
-   "delta": -1.4,
-   "events": 40,
-   "affected": 61079680.12112512,
-   "displaced_est": 3572734.006056256,
-   "dominant_hazard": "flood",
-   "drivers": [
-    {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
-    },
-    {
-     "label": "6-month rainfall anomaly",
-     "z": 1.892636452235566
+     "label": "Longitude",
+     "z": 1.4609488197534641
     },
     {
      "label": "3-month rainfall anomaly",
-     "z": 1.2273799328443367
+     "z": 0.3827916427906707
     }
    ],
    "trend": [
     {
-     "m": "Mar 25",
-     "p": 7.9
-    },
-    {
-     "m": "Apr 25",
-     "p": 8.4
-    },
-    {
-     "m": "May 25",
-     "p": 10.5
-    },
-    {
-     "m": "Jun 25",
-     "p": 31.2
-    },
-    {
-     "m": "Jul 25",
-     "p": 39.3
-    },
-    {
-     "m": "Aug 25",
-     "p": 7.9
-    },
-    {
-     "m": "Sep 25",
-     "p": 2.5
-    },
-    {
-     "m": "Oct 25",
-     "p": 1.5
-    },
-    {
      "m": "Nov 25",
-     "p": 1.5
+     "p": 0.1
     },
     {
      "m": "Dec 25",
+     "p": 0.1
+    },
+    {
+     "m": "Jan 26",
+     "p": 0.1
+    },
+    {
+     "m": "Feb 26",
+     "p": 0.1
+    },
+    {
+     "m": "Mar 26",
+     "p": 6.6
+    },
+    {
+     "m": "Apr 26",
+     "p": 6.6
+    },
+    {
+     "m": "May 26",
+     "p": 6.6
+    },
+    {
+     "m": "Jun 26",
+     "p": 6.6
+    },
+    {
+     "m": "Jul 26",
+     "p": 1.3
+    },
+    {
+     "m": "Aug 26",
+     "p": 0.1
+    }
+   ]
+  },
+  {
+   "name": "Nagaland",
+   "lat": 26.1,
+   "lon": 94.5,
+   "prob": 0.1,
+   "level": "LOW",
+   "delta": 0.0,
+   "events": 11,
+   "affected": 50343145.51785714,
+   "displaced_est": 2548585.847321429,
+   "dominant_hazard": "flood",
+   "drivers": [
+    {
+     "label": "6-month rainfall anomaly",
+     "z": 1.5585699215080677
+    },
+    {
+     "label": "Latitude",
+     "z": 0.4336912739273127
+    },
+    {
+     "label": "3-month temperature anomaly",
+     "z": 0.43932821607179223
+    }
+   ],
+   "trend": [
+    {
+     "m": "Nov 25",
+     "p": 0.1
+    },
+    {
+     "m": "Dec 25",
+     "p": 0.1
+    },
+    {
+     "m": "Jan 26",
+     "p": 6.1
+    },
+    {
+     "m": "Feb 26",
+     "p": 0.1
+    },
+    {
+     "m": "Mar 26",
+     "p": 3.4
+    },
+    {
+     "m": "Apr 26",
+     "p": 6.6
+    },
+    {
+     "m": "May 26",
+     "p": 6.6
+    },
+    {
+     "m": "Jun 26",
+     "p": 6.6
+    },
+    {
+     "m": "Jul 26",
+     "p": 0.1
+    },
+    {
+     "m": "Aug 26",
      "p": 0.1
     }
    ]
@@ -1947,119 +2075,19 @@
    "dominant_hazard": "flood",
    "drivers": [
     {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
-    },
-    {
      "label": "6-month rainfall anomaly",
-     "z": 2.786226362850757
-    },
-    {
-     "label": "3-month rainfall anomaly",
-     "z": 2.7446250939992893
-    }
-   ],
-   "trend": [
-    {
-     "m": "Mar 25",
-     "p": 2.5
-    },
-    {
-     "m": "Apr 25",
-     "p": 10.5
-    },
-    {
-     "m": "May 25",
-     "p": 7.9
-    },
-    {
-     "m": "Jun 25",
-     "p": 7.9
-    },
-    {
-     "m": "Jul 25",
-     "p": 5.6
-    },
-    {
-     "m": "Aug 25",
-     "p": 7.9
-    },
-    {
-     "m": "Sep 25",
-     "p": 0.1
-    },
-    {
-     "m": "Oct 25",
-     "p": 0.1
-    },
-    {
-     "m": "Nov 25",
-     "p": 0.1
-    },
-    {
-     "m": "Dec 25",
-     "p": 0.1
-    }
-   ]
-  },
-  {
-   "name": "Uttar Pradesh",
-   "lat": 26.8,
-   "lon": 80.9,
-   "prob": 0.1,
-   "level": "LOW",
-   "delta": 0.0,
-   "events": 93,
-   "affected": 51402940.15445845,
-   "displaced_est": 3408125.579151494,
-   "dominant_hazard": "flood",
-   "drivers": [
-    {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
+     "z": 3.7251439261965253
     },
     {
      "label": "Latitude",
-     "z": 0.555457228597891
+     "z": 0.6946017996857224
     },
     {
-     "label": "Cyclones in last 12 months",
-     "z": 1.4709884421746413
+     "label": "3-month temperature anomaly",
+     "z": 0.43893114670852523
     }
    ],
    "trend": [
-    {
-     "m": "Mar 25",
-     "p": 7.9
-    },
-    {
-     "m": "Apr 25",
-     "p": 39.3
-    },
-    {
-     "m": "May 25",
-     "p": 39.3
-    },
-    {
-     "m": "Jun 25",
-     "p": 39.3
-    },
-    {
-     "m": "Jul 25",
-     "p": 17.5
-    },
-    {
-     "m": "Aug 25",
-     "p": 10.5
-    },
-    {
-     "m": "Sep 25",
-     "p": 2.5
-    },
-    {
-     "m": "Oct 25",
-     "p": 0.1
-    },
     {
      "m": "Nov 25",
      "p": 0.1
@@ -2067,73 +2095,37 @@
     {
      "m": "Dec 25",
      "p": 0.1
-    }
-   ]
-  },
-  {
-   "name": "Uttarakhand",
-   "lat": 30.1,
-   "lon": 79.2,
-   "prob": 0.1,
-   "level": "LOW",
-   "delta": 0.0,
-   "events": 39,
-   "affected": 2807364.9504901962,
-   "displaced_est": 141868.24752450982,
-   "dominant_hazard": "flood",
-   "drivers": [
-    {
-     "label": "Season (cos)",
-     "z": 1.412505341428436
     },
     {
-     "label": "Latitude",
-     "z": 1.129468352096756
-    },
-    {
-     "label": "Cyclones in last 12 months",
-     "z": 1.4709884421746413
-    }
-   ],
-   "trend": [
-    {
-     "m": "Mar 25",
-     "p": 7.9
-    },
-    {
-     "m": "Apr 25",
-     "p": 10.5
-    },
-    {
-     "m": "May 25",
-     "p": 7.9
-    },
-    {
-     "m": "Jun 25",
-     "p": 7.9
-    },
-    {
-     "m": "Jul 25",
-     "p": 7.9
-    },
-    {
-     "m": "Aug 25",
-     "p": 2.5
-    },
-    {
-     "m": "Sep 25",
+     "m": "Jan 26",
      "p": 0.1
     },
     {
-     "m": "Oct 25",
+     "m": "Feb 26",
      "p": 0.1
     },
     {
-     "m": "Nov 25",
+     "m": "Mar 26",
+     "p": 1.3
+    },
+    {
+     "m": "Apr 26",
+     "p": 6.6
+    },
+    {
+     "m": "May 26",
+     "p": 1.3
+    },
+    {
+     "m": "Jun 26",
      "p": 0.1
     },
     {
-     "m": "Dec 25",
+     "m": "Jul 26",
+     "p": 0.1
+    },
+    {
+     "m": "Aug 26",
      "p": 0.1
     }
    ]
@@ -2141,16 +2133,22 @@
  ],
  "alerts": [
   {
+   "state": "Odisha",
+   "level": "CRITICAL",
+   "prob": 41.2,
+   "msg": "41% chance of a high-impact disaster in the next 3.0 months. Signals: 3-month temperature anomaly (+1.0\u03c3); cyclones in last 12 months (+1.2\u03c3); longitude (+0.3\u03c3)."
+  },
+  {
    "state": "West Bengal",
-   "level": "HIGH",
-   "prob": 13.6,
-   "msg": "14% chance of a high-impact disaster in the next 3.0 months. Signals: season (cos) (+1.4\u03c3); high-impact disasters (3 yrs) (+0.8\u03c3); longitude (+0.8\u03c3)."
+   "level": "CRITICAL",
+   "prob": 28.0,
+   "msg": "28% chance of a high-impact disaster in the next 3.0 months. Signals: 6-month rainfall anomaly (+0.9\u03c3); longitude (+0.8\u03c3); 3-month temperature anomaly (+0.1\u03c3)."
   },
   {
    "state": "Assam",
    "level": "HIGH",
-   "prob": 10.5,
-   "msg": "10% chance of a high-impact disaster in the next 3.0 months. Signals: season (cos) (+1.4\u03c3); high-impact disasters (3 yrs) (+3.7\u03c3); longitude (+1.5\u03c3)."
+   "prob": 20.4,
+   "msg": "20% chance of a high-impact disaster in the next 3.0 months. Signals: 3-month temperature anomaly (+1.3\u03c3); latitude (+0.5\u03c3); longitude (+1.5\u03c3)."
   }
  ]
 }

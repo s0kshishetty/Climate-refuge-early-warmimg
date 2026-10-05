@@ -19,7 +19,7 @@ from states import STATES, normalize_state  # noqa: E402
 
 # ───────────────────────── settings you can tune ─────────────────────────
 HORIZON = 3                 # predict "high-impact event in the next 3 months"
-BASELINE = (1991, 2020)     # climate normal period (WMO standard)
+BASELINE = (2000, 2020)     # climate normal period (WMO standard)
 DISPLACED_FROM_AFFECTED = 0.05   # ASSUMPTION: 5% of 'affected' people are displaced
 HI_QUANTILE = 0.5           # event is "high impact" if displaced proxy >= this quantile
 HAZARDS = ["flood", "cyclone", "drought", "heat"]

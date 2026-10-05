@@ -16,8 +16,8 @@ import requests
 sys.path.insert(0, str(Path(__file__).parent))
 from states import STATES  # noqa: E402
 
-START_YEAR = 1990
-END_YEAR = 2025          # change if you want a different range
+START_YEAR = 2000
+END_YEAR = 2026          # change if you want a different range
 URL = "https://power.larc.nasa.gov/api/temporal/monthly/point"
 CACHE = Path("data/raw/power_cache")
 OUT = Path("data/raw/climate_monthly.csv")
