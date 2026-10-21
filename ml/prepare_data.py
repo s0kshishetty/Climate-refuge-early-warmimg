@@ -76,9 +76,7 @@ def main():
     clim = climate_features()
     ev, thr = load_events()
 
-    ev_end = pd.Timestamp(year=int(ev.year.max()), month=12, day=1)
-    end = min(clim.date.max(), ev_end)
-    clim = clim[clim.date <= end]
+    end = clim.date.max()
     print(f"panel covers {clim.date.min():%Y-%m} → {end:%Y-%m}")
 
     # monthly event table

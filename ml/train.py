@@ -139,7 +139,7 @@ def main():
         contrib = (z.clip(lower=0) * imp_n).drop(
             labels=["month_sin", "month_cos", "lat", "lon", "coastal", "himalayan"], errors="ignore"
         ).sort_values(ascending=False)
-        
+
         drivers = [{"label": LABELS[f], "z": float(z[f])} for f, v in contrib.head(3).items() if v > 0]
         hz = haz_tot.loc[s]
         dominant = hz.idxmax().replace("n_", "") if hz.sum() > 0 else "none"
