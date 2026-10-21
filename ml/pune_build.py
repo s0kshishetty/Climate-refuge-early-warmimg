@@ -5,7 +5,8 @@ Output : public/data/pune.json          (read by src/PuneRisk.tsx)
 
 What it does
   1. Builds features from past weather (rain windows, dry spell, temp anomaly, season...)
-  2. Targets (next 3 days):  rain  = >= 50 mm rain       heat = Tmax >= 38 C
+  2. Targets:  rain  = >= 50 mm in next 3 days      heat = Tmax >= 38 C in next 3 days
+               drought = next-30-day rain < 30% of the month's normal (rainy months only)
   3. Time-based split: train <= 2016, validation 2017-2020, test 2021+
   4. HistGradientBoosting + isotonic calibration, compared with a
      "just use the month's average" baseline
@@ -39,13 +40,18 @@ H = 3                      # warning horizon (days)
 TRAIN_END, VAL_END = 2016, 2020
 RAIN_MM = 50.0             # heavy-rain event: total rain in next H days
 HEAT_C = 38.0              # heat-stress event: any day Tmax >= this
-# risk level = how many times higher than the normal (training) frequency
-LEVELS = [(8.0, "CRITICAL"), (4.0, "HIGH"), (2.0, "MODERATE")]
+DROUGHT_DAYS = 30          # dry-spell horizon (days)
+DROUGHT_FRAC = 0.30        # event: next-30-day rain below 30% of the month's normal
+DROUGHT_MIN_NORMAL = 20.0  # ...judged only in months that normally get >= 20 mm / 30 days
 RANK = {"LOW": 0, "MODERATE": 1, "HIGH": 2, "CRITICAL": 3}
 
 HAZARDS = {
-    "rain": {"label": "Heavy rain / flood", "rule": f">= {RAIN_MM:.0f} mm rain in the next {H} days"},
-    "heat": {"label": "Heat stress", "rule": f"Tmax >= {HEAT_C:.0f} C on any of the next {H} days"},
+    "rain": {"label": "Heavy rain / flood", "horizon": H,
+             "rule": f">= {RAIN_MM:.0f} mm rain in the next {H} days"},
+    "heat": {"label": "Heat stress", "horizon": H,
+             "rule": f"Tmax >= {HEAT_C:.0f} C on any of the next {H} days"},
+    "drought": {"label": "Dry spell / drought", "horizon": DROUGHT_DAYS,
+                "rule": f"next {DROUGHT_DAYS} days' rain < {DROUGHT_FRAC:.0%} of normal (rainy months only)"},
 }
 LABELS = {
     "rain_1d": "Rain today", "rain_3d": "Rain last 3 days", "rain_7d": "Rain last 7 days",
@@ -102,10 +108,14 @@ def features(df, clim, a, elev):
     return f[FEATURES]
 
 
-def targets(df):
+def targets(df, clim):
     fr = df["rain"].rolling(H).sum().shift(-H)      # rain over t+1 .. t+H
     ft = df["tmax"].rolling(H).max().shift(-H)      # hottest day over t+1 .. t+H
+    f30 = df["rain"].rolling(DROUGHT_DAYS).sum().shift(-DROUGHT_DAYS)
+    normal = clim["rain30"].reindex(df.index.month).to_numpy()
+    dry = (f30 < DROUGHT_FRAC * normal) & (normal >= DROUGHT_MIN_NORMAL)
     return pd.DataFrame({
+        "drought": dry.astype(float).where(f30.notna()),
         "rain": (fr >= RAIN_MM).astype(float).where(fr.notna()),
         "heat": (ft >= HEAT_C).astype(float).where(ft.notna()),
     }, index=df.index)
@@ -193,10 +203,14 @@ def recent_weather(a, hist):
 
 
 def level_of(p, base):
+    """Level from how much higher than normal the chance is (or a high absolute chance)."""
     lift = p / base if base > 0 else 0.0
-    for t, name in LEVELS:
-        if lift >= t:
-            return name, lift
+    if lift >= 8 or p >= 0.8:
+        return "CRITICAL", lift
+    if lift >= 4 or p >= 0.5:
+        return "HIGH", lift
+    if lift >= 2:
+        return "MODERATE", lift
     return "LOW", lift
 
 
@@ -208,7 +222,7 @@ def main():
         hist[a["id"]] = df
         elevs[a["id"]] = float(df["elevation"].iloc[0])
         clims[a["id"]] = climatology(df)
-        p = pd.concat([features(df, clims[a["id"]], a, elevs[a["id"]]), targets(df)], axis=1)
+        p = pd.concat([features(df, clims[a["id"]], a, elevs[a["id"]]), targets(df, clims[a["id"]])], axis=1)
         frames.append(p)
     panel = pd.concat(frames).dropna(subset=FEATURES)
     print(f"  {len(panel):,} area-days, {len(AREAS)} areas")
@@ -235,7 +249,7 @@ def main():
                 p = min(1.0, p * (0.7 + 0.6 * a["exposure"]))
             lvl, lift = level_of(p, m["base_rate"])
             out[k] = {"prob": round(p, 4), "level": lvl, "lift": round(lift, 2)}
-        out["overall"] = max((out["rain"]["level"], out["heat"]["level"]), key=RANK.get)
+        out["overall"] = max((out[k]["level"] for k in HAZARDS), key=RANK.get)
 
         mon = day.month
         out["recent"] = {k: round(float(row[c]), 1) for k, c in [
@@ -266,8 +280,8 @@ def main():
         "test_years": [VAL_END + 1, models["rain"]["years"][1]],
         "n_rows": int(len(panel)),
         "level_rule": ("Level = how many times higher than the normal frequency of the event "
-                       "(x2 MODERATE, x4 HIGH, x8 CRITICAL). Rain risk is scaled by the area's "
-                       "flood-exposure estimate."),
+                       "(x2 MODERATE, x4 HIGH, x8 CRITICAL; a chance of 50% / 80% is also HIGH / "
+                       "CRITICAL). Rain risk is scaled by the area's flood-exposure estimate."),
         "hazards": {k: {**HAZARDS[k], "base_rate": round(models[k]["base_rate"], 4),
                         "metrics": {mk: (None if np.isnan(mv) else round(mv, 4))
                                     for mk, mv in models[k]["metrics"].items()},

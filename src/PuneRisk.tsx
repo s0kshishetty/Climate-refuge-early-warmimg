@@ -8,13 +8,13 @@ interface Hazard { prob: number; level: Level; lift: number }
 interface Area {
   id: string; name: string; lat: number; lon: number
   elevation: number; exposure: number
-  rain: Hazard; heat: Hazard; overall: Level
+  rain: Hazard; heat: Hazard; drought: Hazard; overall: Level
   recent: { rain_3d: number; rain_7d: number; rain_30d: number; tmax: number; tmin: number }
   drivers: { label: string; detail: string }[]
   history: { d: string; rain: number; tmax: number }[]
 }
 interface HazardMeta {
-  label: string; rule: string; base_rate: number
+  label: string; rule: string; horizon: number; base_rate: number
   metrics: {
     roc_auc: number | null; pr_auc: number | null; brier: number | null
     baseline_roc_auc: number | null; baseline_pr_auc: number | null
@@ -26,7 +26,7 @@ interface PuneData {
     generated: string; as_of: string; source: string; live_areas: number
     horizon_days: number; n_rows: number; level_rule: string
     train_years: number[]; val_years: number[]; test_years: number[]
-    hazards: { rain: HazardMeta; heat: HazardMeta }
+    hazards: { rain: HazardMeta; heat: HazardMeta; drought: HazardMeta }
   }
   areas: Area[]
 }
@@ -36,7 +36,20 @@ const COLORS: Record<Level, string> = {
 }
 const RANK: Record<Level, number> = { CRITICAL: 3, HIGH: 2, MODERATE: 1, LOW: 0 }
 
-const pct = (p: number) => `${(p * 100).toFixed(p < 0.1 ? 1 : 0)}%`
+const OTHER_HAZARDS = [
+  {
+    title: 'Earthquake',
+    body: 'Earthquakes cannot be predicted from weather data, so there is no forecast here. Pune lies in a moderate seismic zone (Zone III in the BIS code; check the latest IS 1893 map). The Koyna–Warna region to the south is known for reservoir-induced earthquakes.',
+    tip: 'Know your building’s safety, secure heavy furniture, and follow NDMA / IMD (seismology) guidance.',
+  },
+  {
+    title: 'Cyclone',
+    body: 'Pune is inland, so direct cyclone landfall is very unlikely. Cyclones in the Arabian Sea can still bring strong wind and heavy rain here; that effect is already covered by the heavy-rain model above.',
+    tip: 'During a cyclone alert for the Konkan coast, treat the heavy-rain warning more seriously.',
+  },
+]
+
+const pct = (p: number) =>  p < 0.001 ? '<0.1%' : `${(p * 100).toFixed(p < 0.1 ? 1 : 0)}%`
 const num = (v: number | null) => (v === null ? '–' : v.toFixed(3))
 
 function Badge({ level }: { level: Level }) {
@@ -50,7 +63,7 @@ function Badge({ level }: { level: Level }) {
   )
 }
 
-function HazardTile({ title, h, note }: { title: string; h: Hazard; note: string }) {
+function HazardTile({ title, h, days, note }: { title: string; h: Hazard; days: number; note: string }) {
   return (
     <div className="rounded-xl border border-black/10 bg-white p-4">
       <div className="flex items-center justify-between">
@@ -61,7 +74,7 @@ function HazardTile({ title, h, note }: { title: string; h: Hazard; note: string
         {pct(h.prob)}
       </div>
       <div className="mt-1 text-xs opacity-70">
-        chance in next 3 days · {h.lift.toFixed(1)}× normal
+        chance in next {days} days · {h.lift.toFixed(1)}× normal
       </div>
       <div className="mt-2 text-xs opacity-60">{note}</div>
     </div>
@@ -124,7 +137,7 @@ python ml/pune_build.py`}
       <div className="max-w-6xl">
         <h1 className="text-2xl font-semibold md:text-3xl">Pune · Area-wise Early Warning</h1>
         <p className="mt-1 text-sm opacity-70">
-          Risk for the next {m.horizon_days} days · data as of {m.as_of} · {m.source}
+          Rain & heat: next {m.hazards.rain.horizon} days · Dry spell: next {m.hazards.drought.horizon} days · data as of {m.as_of} · {m.source}
         </p>
       </div>
 
@@ -168,16 +181,24 @@ python ml/pune_build.py`}
               </span>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid gap-4 sm:grid-cols-3">
               <HazardTile
                 title="Heavy rain / flood"
                 h={selected.rain}
+                days={m.hazards.rain.horizon}
                 note={`Scaled by area flood exposure (${selected.exposure.toFixed(1)}, estimate)`}
               />
               <HazardTile
                 title="Heat stress"
                 h={selected.heat}
-                note={`Max temp ≥ 38 °C on any of next ${m.horizon_days} days`}
+                days={m.hazards.heat.horizon}
+                note="Max temp ≥ 38 °C on any of these days (Pune's heat season is mostly Mar–May)"
+              />
+              <HazardTile
+                title="Dry spell / drought"
+                h={selected.drought}
+                days={m.hazards.drought.horizon}
+                note="Rain below 30% of normal (rainy months only)"
               />
             </div>
 
@@ -224,6 +245,20 @@ python ml/pune_build.py`}
         )}
       </div>
 
+      {/* hazards that are NOT predicted by the model */}
+      <div className="mt-10 max-w-6xl">
+        <h3 className="text-base font-semibold">Other hazards (information only, not predicted)</h3>
+        <div className="mt-3 grid gap-4 md:grid-cols-2">
+          {OTHER_HAZARDS.map((o) => (
+            <div key={o.title} className="rounded-xl border border-black/10 bg-white p-4 text-sm">
+              <div className="font-medium">{o.title}</div>
+              <p className="mt-1 opacity-80">{o.body}</p>
+              <p className="mt-2 text-xs opacity-60">{o.tip}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* model card */}
       <div className="mt-10 max-w-6xl rounded-xl border border-black/10 bg-white p-5">
         <h3 className="text-base font-semibold">How reliable is this?</h3>
@@ -232,7 +267,7 @@ python ml/pune_build.py`}
           {m.train_years[1]}, validation {m.val_years[0]}–{m.val_years[1]}, test{' '}
           {m.test_years[0]}–{m.test_years[1]}. {m.level_rule}
         </p>
-        <div className="mt-4 grid gap-5 md:grid-cols-2">
+        <div className="mt-4 grid gap-5 md:grid-cols-3">
           {(Object.keys(m.hazards) as (keyof PuneData['meta']['hazards'])[]).map((k) => {
             const h = m.hazards[k]
             return (

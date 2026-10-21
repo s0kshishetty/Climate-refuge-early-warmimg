@@ -244,7 +244,7 @@ export default function App() {
                 <em className="not-italic text-[#4A7C59]">Induced Migration</em>
               </h1>
 
-              <p className="text-black/45 text-lg leading-relaxed mb-10 max-w-lg">
+              <p className="text-black/75 text-lg leading-relaxed mb-10 max-w-lg">
                 Predicting which Indian states are most likely to face disasters severe enough to
                 displace people. A machine-learning model trained on historical climate and disaster
                 records issues a {horizon}-month risk forecast for every state.
@@ -254,7 +254,7 @@ export default function App() {
                 <a href="#risk-map" className="bg-[#4A7C59] hover:bg-[#3D6B4E] text-white text-sm font-semibold px-6 py-3 rounded-sm transition-colors tracking-wide">
                   View State Risk →
                 </a>
-                <a href="#methodology" className="border border-black/15 hover:border-black/30 text-black/45 hover:text-black/80 text-sm font-medium px-6 py-3 rounded-sm transition-all tracking-wide">
+                <a href="#methodology" className="border border-black/15 hover:border-black/30 text-black/75 hover:text-black/80 text-sm font-medium px-6 py-3 rounded-sm transition-all tracking-wide">
                   How It Works
                 </a>
               </div>
@@ -270,16 +270,16 @@ export default function App() {
                 { label: 'Data As Of', value: meta.as_of, sub: `built ${meta.generated}`, color: '#D4782A' },
               ].map(stat => (
                 <div key={stat.label} className="bg-white/70 border border-black/[0.07] rounded p-4 hover:border-[#4A7C59]/25 transition-colors backdrop-blur-sm">
-                  <p className="text-black/30 text-[10px] font-mono tracking-widest uppercase mb-2">{stat.label}</p>
+                  <p className="text-black/60 text-[10px] font-mono tracking-widest uppercase mb-2">{stat.label}</p>
                   <p style={{ fontFamily: 'Fraunces, serif', color: stat.color }} className="text-3xl font-semibold mb-0.5">{stat.value}</p>
-                  <p className="text-black/30 text-xs font-mono">{stat.sub}</p>
+                  <p className="text-black/60 text-xs font-mono">{stat.sub}</p>
                 </div>
               ))}
             </div>
           </div>
 
           <div className="mt-16 flex justify-center">
-            <div className="flex flex-col items-center gap-2 text-black/15">
+            <div className="flex flex-col items-center gap-2 text-black/75">
               <div className="w-px h-8 bg-gradient-to-b from-transparent to-black/15" />
               <span className="text-[10px] font-mono tracking-widest">SCROLL</span>
             </div>
@@ -307,10 +307,10 @@ export default function App() {
       <section className="max-w-7xl mx-auto px-6 py-16">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <p className="text-[10px] font-mono text-black/25 tracking-widest uppercase mb-1">Latest Forecast</p>
+            <p className="text-[10px] font-mono text-black/75 tracking-widest uppercase mb-1">Latest Forecast</p>
             <h2 style={{ fontFamily: 'Fraunces, serif' }} className="text-2xl font-semibold">Active Alerts</h2>
           </div>
-          <div className="text-xs font-mono text-black/30">As of {meta.as_of}</div>
+          <div className="text-xs font-mono text-black/75">As of {meta.as_of}</div>
         </div>
 
         <div className="space-y-2">
@@ -320,17 +320,17 @@ export default function App() {
               style={{ borderLeft: `2px solid ${RISK_COLOR[alert.level]}` }}>
               <RiskBadge level={alert.level} />
               <div className="flex-1 min-w-0">
-                <span className="text-black/50 text-xs font-mono mr-2">{alert.state}</span>
+                <span className="text-black/70 text-xs font-mono mr-2">{alert.state}</span>
                 <span className="text-black/60 text-sm">{alert.msg}</span>
               </div>
               <button onClick={() => setDismissed(prev => [...prev, alert.state])}
-                className="text-black/15 hover:text-black/50 transition-colors opacity-0 group-hover:opacity-100 text-xs font-mono">
+                className="text-black/70 hover:text-black/70 transition-colors opacity-0 group-hover:opacity-100 text-xs font-mono">
                 ✕
               </button>
             </div>
           ))}
           {activeAlerts.length === 0 && (
-            <div className="text-center py-8 text-black/25 text-sm font-mono">No active alerts</div>
+            <div className="text-center py-8 text-black/70 text-sm font-mono">No active alerts</div>
           )}
         </div>
       </section>
@@ -339,14 +339,14 @@ export default function App() {
       <section id="risk-map" className="max-w-7xl mx-auto px-6 pb-20">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
           <div>
-            <p className="text-[10px] font-mono text-black/25 tracking-widest uppercase mb-1">Vulnerability Assessment</p>
+            <p className="text-[10px] font-mono text-black/75 tracking-widest uppercase mb-1">Vulnerability Assessment</p>
             <h2 style={{ fontFamily: 'Fraunces, serif' }} className="text-2xl font-semibold">State-wise Risk</h2>
           </div>
           <div className="flex items-center gap-1 bg-white/60 border border-black/[0.07] rounded p-1">
             {['ALL', 'CRITICAL', 'HIGH', 'MODERATE', 'LOW'].map(f => (
               <button key={f} onClick={() => setFilter(f)}
                 className={`text-[10px] font-mono tracking-widest px-3 py-1.5 rounded-sm transition-all ${
-                  filter === f ? 'bg-[#4A7C59] text-white' : 'text-black/30 hover:text-black/60'}`}>
+                  filter === f ? 'bg-[#4A7C59] text-white' : 'text-black/70 hover:text-black/60'}`}>
                 {f}
               </button>
             ))}
@@ -361,7 +361,7 @@ export default function App() {
               <div className="flex items-start justify-between mb-4">
                 <div className="flex-1 min-w-0 pr-4">
                   <h3 className="font-semibold text-sm mb-0.5 text-[#1A2418]/80">{r.name}</h3>
-                  <p className="text-black/30 text-xs font-mono">
+                  <p className="text-black/60 text-xs font-mono">
                     {r.drivers.length ? r.drivers.map(d => d.label).join(' · ') : 'No elevated signals'}
                   </p>
                 </div>
@@ -378,8 +378,8 @@ export default function App() {
               </div>
 
               <div className="flex items-center justify-between mt-4 pt-4 border-t border-black/[0.05]">
-                <span className="text-black/25 text-[10px] font-mono">{r.lat.toFixed(1)}°N · {r.lon.toFixed(1)}°E</span>
-                <span className="text-black/25 text-[10px] font-mono">Forecast as of {meta.as_of}</span>
+                <span className="text-black/55 text-[10px] font-mono">{r.lat.toFixed(1)}°N · {r.lon.toFixed(1)}°E</span>
+                <span className="text-black/55 text-[10px] font-mono">Forecast as of {meta.as_of}</span>
               </div>
             </div>
           ))}
@@ -391,15 +391,15 @@ export default function App() {
         <div className="bg-white/60 border border-black/[0.07] rounded p-8 backdrop-blur-sm">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
             <div>
-              <p className="text-[10px] font-mono text-black/25 tracking-widest uppercase mb-1">Last 10 months</p>
+              <p className="text-[10px] font-mono text-black/65 tracking-widest uppercase mb-1">Last 10 months</p>
               <h2 style={{ fontFamily: 'Fraunces, serif' }} className="text-xl font-semibold">Risk Trajectory</h2>
-              <p className="text-black/35 text-sm mt-1">Predicted probability (%) of a high-impact disaster, top 3 states</p>
+              <p className="text-black/65 text-sm mt-1">Predicted probability (%) of a high-impact disaster, top 3 states</p>
             </div>
             <div className="flex gap-5 text-xs font-mono">
               {top3.map((s, i) => (
                 <div key={s.name} className="flex items-center gap-1.5">
                   <div className="w-5 h-0.5 rounded" style={{ backgroundColor: lineColors[i] }} />
-                  <span className="text-black/45">{s.name}</span>
+                  <span className="text-black/55">{s.name}</span>
                 </div>
               ))}
             </div>
@@ -428,9 +428,9 @@ export default function App() {
       <section id="methodology" className="max-w-7xl mx-auto px-6 pb-20">
         <div className="grid lg:grid-cols-[280px_1fr] gap-16">
           <div>
-            <p className="text-[10px] font-mono text-black/25 tracking-widest uppercase mb-3">How It Works</p>
+            <p className="text-[10px] font-mono text-black/65 tracking-widest uppercase mb-3">How It Works</p>
             <h2 style={{ fontFamily: 'Fraunces, serif' }} className="text-3xl font-semibold leading-snug mb-4">The Prediction Pipeline</h2>
-            <p className="text-black/40 text-sm leading-relaxed">
+            <p className="text-black/70 text-sm leading-relaxed">
               Four stages turn historical climate and disaster data into a state-level displacement-risk forecast.
             </p>
           </div>
@@ -438,10 +438,10 @@ export default function App() {
             {methodSteps.map(step => (
               <div key={step.n} className="bg-white/60 border border-black/[0.07] rounded p-6 hover:border-[#4A7C59]/25 transition-colors">
                 <div className="flex items-start gap-4 mb-3">
-                  <span style={{ fontFamily: 'JetBrains Mono, monospace' }} className="text-[10px] font-semibold text-black/25 tracking-widest mt-0.5">{step.n}</span>
+                  <span style={{ fontFamily: 'JetBrains Mono, monospace' }} className="text-[10px] font-semibold text-black/65 tracking-widest mt-0.5">{step.n}</span>
                   <h3 className="font-semibold text-sm text-[#1A2418]">{step.title}</h3>
                 </div>
-                <p className="text-black/45 text-xs leading-relaxed pl-8">{step.desc}</p>
+                <p className="text-black/65 text-xs leading-relaxed pl-8">{step.desc}</p>
               </div>
             ))}
           </div>
@@ -451,7 +451,7 @@ export default function App() {
       {/* ── What drives the model ────────────────────────────── */}
       <section className="border-t border-black/[0.05] max-w-7xl mx-auto px-6 py-20">
         <div className="text-center mb-12">
-          <p className="text-[10px] font-mono text-black/25 tracking-widest uppercase mb-3">Model Drivers</p>
+          <p className="text-[10px] font-mono text-black/75 tracking-widest uppercase mb-3">Model Drivers</p>
           <h2 style={{ fontFamily: 'Fraunces, serif' }} className="text-3xl font-semibold">What the Model Relies On</h2>
           <p className="text-black/40 text-sm mt-3">Permutation importance on the test years (share of total)</p>
         </div>
@@ -462,7 +462,7 @@ export default function App() {
               <div className="flex-1 h-2 bg-black/[0.06] rounded-full overflow-hidden">
                 <div className="h-full bg-[#4A7C59] rounded-full" style={{ width: `${(f.importance / maxImp) * 100}%` }} />
               </div>
-              <span style={{ fontFamily: 'JetBrains Mono, monospace' }} className="w-12 text-right text-xs text-black/45">
+              <span style={{ fontFamily: 'JetBrains Mono, monospace' }} className="w-12 text-right text-xs text-black/70">
                 {(f.importance * 100).toFixed(0)}%
               </span>
             </div>
@@ -474,7 +474,7 @@ export default function App() {
       <section className="max-w-7xl mx-auto px-6 pb-20">
         <div className="bg-white/60 border border-black/[0.07] rounded p-8 lg:p-10 backdrop-blur-sm">
           <div className="mb-8">
-            <p className="text-[10px] font-mono text-black/25 tracking-widest uppercase mb-2">Reference</p>
+            <p className="text-[10px] font-mono text-black/65 tracking-widest uppercase mb-2">Reference</p>
             <h2 style={{ fontFamily: 'Fraunces, serif' }} className="text-2xl font-semibold">Alert Level Definitions</h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -485,7 +485,7 @@ export default function App() {
                 <p style={{ fontFamily: 'JetBrains Mono, monospace', color: RISK_COLOR[item.level] }} className="text-2xl font-semibold mt-3 mb-2">
                   {item.range}
                 </p>
-                <p className="text-black/45 text-xs leading-relaxed">{item.desc}</p>
+                <p className="text-black/65 text-xs leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -496,16 +496,16 @@ export default function App() {
       <section id="model" className="border-t border-black/[0.05] max-w-7xl mx-auto px-6 py-20">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <div>
-            <p className="text-[10px] font-mono text-black/25 tracking-widest uppercase mb-3">Evaluation</p>
+            <p className="text-[10px] font-mono text-black/65 tracking-widest uppercase mb-3">Evaluation</p>
             <h2 style={{ fontFamily: 'Fraunces, serif' }} className="text-4xl font-semibold leading-tight mb-4">
               How Good Is<br />the Forecast?
             </h2>
-            <p className="text-black/45 text-base leading-relaxed mb-6">
+            <p className="text-black/65 text-base leading-relaxed mb-6">
               Tested on {meta.test_years[0]}–{meta.test_years[1]}, years the model never saw during training.
               About {(gb.base_rate ?? meta.positive_rate) * 100 > 0 ? ((gb.base_rate ?? meta.positive_rate) * 100).toFixed(1) : '0'}% of
               state-months were followed by a high-impact disaster, so a useful model must beat that base rate.
             </p>
-            <div className="bg-white/60 border border-black/[0.07] rounded p-5 text-xs text-black/50 leading-relaxed">
+            <div className="bg-white/60 border border-black/[0.07] rounded p-5 text-xs text-black/70 leading-relaxed">
               <p className="font-semibold text-black/70 mb-2">Limitations</p>
               <ul className="space-y-1.5 list-disc pl-4">
                 <li>No official month-wise migration count exists for Indian states. Displacement is estimated from disaster records (homeless + a share of affected people).</li>
@@ -518,7 +518,7 @@ export default function App() {
           <div className="bg-white/60 border border-black/[0.07] rounded overflow-hidden">
             <table className="w-full text-xs">
               <thead>
-                <tr className="text-black/30 font-mono tracking-widest uppercase text-[10px] border-b border-black/[0.06]">
+                <tr className="text-black/60 font-mono tracking-widest uppercase text-[10px] border-b border-black/[0.06]">
                   <th className="text-left p-4">Model</th>
                   <th className="text-right p-4">ROC-AUC</th>
                   <th className="text-right p-4">PR-AUC</th>
@@ -554,21 +554,21 @@ export default function App() {
                 </div>
                 <span style={{ fontFamily: 'Fraunces, serif' }} className="text-sm font-semibold">ClimateWatch India EWS</span>
               </div>
-              <p className="text-black/35 text-xs leading-relaxed max-w-sm">
+              <p className="text-black/65 text-xs leading-relaxed max-w-sm">
                 Early warning for climate-induced migration in India. Academic project built with
                 Python (scikit-learn) and React.
               </p>
             </div>
             <div>
-              <h4 className="text-black/30 text-[10px] font-mono tracking-widest uppercase mb-4">Data Sources</h4>
-              <ul className="space-y-2 text-xs text-black/40">
+              <h4 className="text-black/60 text-[10px] font-mono tracking-widest uppercase mb-4">Data Sources</h4>
+              <ul className="space-y-2 text-xs text-black/60">
                 <li>NASA POWER — monthly temperature and rainfall</li>
                 <li>EM-DAT — disaster records for India</li>
                 <li>Census of India — migration context (optional)</li>
               </ul>
             </div>
           </div>
-          <div className="pt-8 border-t border-black/[0.06] text-black/30 text-xs font-mono">
+          <div className="pt-8 border-t border-black/[0.06] text-black/60 text-xs font-mono">
             © 2026 ClimateWatch India EWS · Forecast as of {meta.as_of} · Model: {meta.model}
           </div>
         </div>
