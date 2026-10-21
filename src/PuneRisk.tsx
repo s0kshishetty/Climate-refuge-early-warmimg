@@ -8,6 +8,7 @@ interface Hazard { prob: number; level: Level; lift: number }
 interface Area {
   id: string; name: string; lat: number; lon: number
   elevation: number; exposure: number
+  exposure_source: 'computed' | 'estimate'; river_dist_km?: number; height_above_river_m?: number
   rain: Hazard; heat: Hazard; drought: Hazard; overall: Level
   recent: { rain_3d: number; rain_7d: number; rain_30d: number; tmax: number; tmin: number }
   drivers: { label: string; detail: string }[]
@@ -49,7 +50,14 @@ const OTHER_HAZARDS = [
   },
 ]
 
-const pct = (p: number) =>  p < 0.001 ? '<0.1%' : `${(p * 100).toFixed(p < 0.1 ? 1 : 0)}%`
+const EXPOSURE_COMPUTED_NOTE =
+  'Flood-exposure index (0–1) is computed from real geographic data: distance to the nearest river/stream (OpenStreetMap) and height above it (SRTM elevation). It is a physical susceptibility index, not an official flood-inundation map, and has not been verified by PMC, IMD or NDMA. It only scales the heavy-rain risk figure.'
+
+const EXPOSURE_NOTE =
+  'Flood exposure (0–1) is an ESTIMATE assumed for this project. It is not measured data and has not been verified by PMC, IMD, NDMA or any official source. It only scales the heavy-rain risk figure.'
+
+const pct = (p: number) =>
+  p < 0.001 ? '<0.1%' : `${(p * 100).toFixed(p < 0.1 ? 1 : 0)}%`
 const num = (v: number | null) => (v === null ? '–' : v.toFixed(3))
 
 function Badge({ level }: { level: Level }) {
@@ -63,7 +71,7 @@ function Badge({ level }: { level: Level }) {
   )
 }
 
-function HazardTile({ title, h, days, note }: { title: string; h: Hazard; days: number; note: string }) {
+function HazardTile({ title, h, days, note, tip }: { title: string; h: Hazard; days: number; note: string; tip?: string }) {
   return (
     <div className="rounded-xl border border-black/10 bg-white p-4">
       <div className="flex items-center justify-between">
@@ -76,7 +84,9 @@ function HazardTile({ title, h, days, note }: { title: string; h: Hazard; days: 
       <div className="mt-1 text-xs opacity-70">
         chance in next {days} days · {h.lift.toFixed(1)}× normal
       </div>
-      <div className="mt-2 text-xs opacity-60">{note}</div>
+      <div className="mt-2 text-xs opacity-60" title={tip}>
+        {note}{tip ? ' ⓘ' : ''}
+      </div>
     </div>
   )
 }
@@ -186,13 +196,18 @@ python ml/pune_build.py`}
                 title="Heavy rain / flood"
                 h={selected.rain}
                 days={m.hazards.rain.horizon}
-                note={`Scaled by area flood exposure (${selected.exposure.toFixed(1)}, estimate)`}
+                note={
+                  selected.exposure_source === 'computed'
+                    ? `Scaled by flood-exposure index ${selected.exposure.toFixed(2)} / 1 (computed from map + elevation data, not an official flood map)`
+                    : `Scaled by flood-exposure estimate ${selected.exposure.toFixed(1)} / 1 (assumed, not official data)`
+                }
+                tip={selected.exposure_source === 'computed' ? EXPOSURE_COMPUTED_NOTE : EXPOSURE_NOTE}
               />
               <HazardTile
                 title="Heat stress"
                 h={selected.heat}
                 days={m.hazards.heat.horizon}
-                note="Max temp ≥ 38 °C on any of these days (Pune's heat season is mostly Mar–May)"
+                note="Max temp ≥ 38 °C on any of these days (Pune’s heat season is mostly Mar–May)"
               />
               <HazardTile
                 title="Dry spell / drought"
@@ -201,6 +216,18 @@ python ml/pune_build.py`}
                 note="Rain below 30% of normal (rainy months only)"
               />
             </div>
+
+            {selected.river_dist_km !== undefined && (
+              <div
+                className="rounded-xl border border-black/10 bg-white px-4 py-3 text-sm"
+                title={EXPOSURE_COMPUTED_NOTE}
+              >
+                <span className="font-medium">Flood-exposure inputs (measured):</span>{' '}
+                nearest river/stream {selected.river_dist_km} km away (OpenStreetMap) · area is{' '}
+                {selected.height_above_river_m} m above it (SRTM elevation) · index{' '}
+                {selected.exposure.toFixed(2)} ⓘ
+              </div>
+            )}
 
             <div className="grid gap-4 sm:grid-cols-3">
               {[
@@ -307,7 +334,7 @@ python ml/pune_build.py`}
         <p className="mt-4 text-xs opacity-60">
           Limits: weather is reanalysis data (≈10–25 km grid), so nearby areas share similar
           weather; area differences come mostly from location, elevation and the flood-exposure
-          estimate. This is a research prototype, not an official warning — follow IMD / PMC
+          estimate. {EXPOSURE_COMPUTED_NOTE} Areas without computed values use labeled estimates. This is a research prototype, not an official warning — follow IMD / PMC
           alerts.
         </p>
       </div>

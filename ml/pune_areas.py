@@ -3,9 +3,11 @@
 lat/lon are approximate area centres (verify on a map if you need precision).
 
 `exposure` (0-1) is a flood-exposure ESTIMATE: riverside / low-lying / known
-waterlogging areas get higher values. It is a hand-made assumption, NOT a
-measured value. Replace it later with real data (PMC flood maps, OSM distance
-to river, drainage data).
+waterlogging areas get higher values. It is a hand-made assumption by the
+project - NOT measured data and NOT verified by PMC, IMD, NDMA or any official
+source. It is shown as an estimate in the UI and only scales the rain risk.
+Replace it later with real data (PMC flood maps, OSM distance to river,
+drainage data).
 """
 
 AREAS = [
@@ -33,4 +35,28 @@ AREAS = [
     {"id": "bibwewadi",        "name": "Bibwewadi",        "lat": 18.4730, "lon": 73.8590, "exposure": 0.3},
     {"id": "swargate",         "name": "Swargate",         "lat": 18.5018, "lon": 73.8636, "exposure": 0.4},
     {"id": "camp",             "name": "Pune Camp",        "lat": 18.5196, "lon": 73.8790, "exposure": 0.4},
+    # ── added areas: coordinates approximate, exposure values are ESTIMATES (not official data) ──
+    {"id": "kalyani-nagar",    "name": "Kalyani Nagar",    "lat": 18.5463, "lon": 73.9033, "exposure": 0.5},
+    {"id": "koregaon-park",    "name": "Koregaon Park",    "lat": 18.5362, "lon": 73.8937, "exposure": 0.5},
+    {"id": "mundhwa",          "name": "Mundhwa",          "lat": 18.5322, "lon": 73.9322, "exposure": 0.5},
+    {"id": "dhayari",          "name": "Dhayari",          "lat": 18.4469, "lon": 73.8052, "exposure": 0.6},
+    {"id": "ambegaon",         "name": "Ambegaon",         "lat": 18.4535, "lon": 73.8442, "exposure": 0.7},
 ]
+
+
+# ── real, computed exposure (written by ml/pune_exposure.py) overrides the hand estimates ──
+import json  # noqa: E402
+from pathlib import Path  # noqa: E402
+
+for _a in AREAS:
+    _a.setdefault("exposure_source", "estimate")
+
+_f = Path(__file__).with_name("pune_exposure.json")
+if _f.exists():
+    _data = json.loads(_f.read_text())
+    for _a in AREAS:
+        _v = _data.get(_a["id"])
+        if _v:
+            _a.update(exposure=_v["exposure"], exposure_source="computed",
+                      river_dist_km=_v["river_dist_km"],
+                      height_above_river_m=_v["height_above_river_m"])

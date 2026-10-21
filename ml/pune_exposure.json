@@ -1,0 +1,151 @@
+{
+ "shivajinagar": {
+  "exposure": 0.63,
+  "river_dist_km": 0.86,
+  "height_above_river_m": 8.0
+ },
+ "deccan": {
+  "exposure": 0.65,
+  "river_dist_km": 0.37,
+  "height_above_river_m": 13.0
+ },
+ "kothrud": {
+  "exposure": 0.98,
+  "river_dist_km": 0.07,
+  "height_above_river_m": 0.0
+ },
+ "warje": {
+  "exposure": 0.98,
+  "river_dist_km": 0.07,
+  "height_above_river_m": 0.0
+ },
+ "sinhagad-road": {
+  "exposure": 0.97,
+  "river_dist_km": 0.11,
+  "height_above_river_m": 0.0
+ },
+ "aundh": {
+  "exposure": 0.58,
+  "river_dist_km": 0.65,
+  "height_above_river_m": 13.0
+ },
+ "baner": {
+  "exposure": 0.74,
+  "river_dist_km": 0.15,
+  "height_above_river_m": 11.0
+ },
+ "pashan": {
+  "exposure": 1.0,
+  "river_dist_km": 0.01,
+  "height_above_river_m": 0.0
+ },
+ "hinjewadi": {
+  "exposure": 0.69,
+  "river_dist_km": 0.5,
+  "height_above_river_m": 9.0
+ },
+ "wakad": {
+  "exposure": 0.45,
+  "river_dist_km": 1.09,
+  "height_above_river_m": 14.0
+ },
+ "pimpri-chinchwad": {
+  "exposure": 0.58,
+  "river_dist_km": 0.73,
+  "height_above_river_m": 12.0
+ },
+ "nigdi": {
+  "exposure": 0.0,
+  "river_dist_km": 2.68,
+  "height_above_river_m": 40.0
+ },
+ "bhosari": {
+  "exposure": 0.33,
+  "river_dist_km": 0.93,
+  "height_above_river_m": 22.0
+ },
+ "yerwada": {
+  "exposure": 0.36,
+  "river_dist_km": 1.03,
+  "height_above_river_m": 19.0
+ },
+ "sangamwadi": {
+  "exposure": 0.69,
+  "river_dist_km": 0.28,
+  "height_above_river_m": 12.0
+ },
+ "viman-nagar": {
+  "exposure": 0.2,
+  "river_dist_km": 2.44,
+  "height_above_river_m": 15.0
+ },
+ "kharadi": {
+  "exposure": 0.55,
+  "river_dist_km": 0.68,
+  "height_above_river_m": 14.0
+ },
+ "wagholi": {
+  "exposure": 0.0,
+  "river_dist_km": 4.35,
+  "height_above_river_m": 45.0
+ },
+ "hadapsar": {
+  "exposure": 0.95,
+  "river_dist_km": 0.2,
+  "height_above_river_m": 0.0
+ },
+ "kondhwa": {
+  "exposure": 0.6,
+  "river_dist_km": 1.58,
+  "height_above_river_m": 0.0
+ },
+ "katraj": {
+  "exposure": 0.38,
+  "river_dist_km": 0.48,
+  "height_above_river_m": 26.0
+ },
+ "bibwewadi": {
+  "exposure": 0.87,
+  "river_dist_km": 0.19,
+  "height_above_river_m": 4.0
+ },
+ "swargate": {
+  "exposure": 0.9,
+  "river_dist_km": 0.15,
+  "height_above_river_m": 3.0
+ },
+ "camp": {
+  "exposure": 0.67,
+  "river_dist_km": 0.68,
+  "height_above_river_m": 8.0
+ },
+ "kalyani-nagar": {
+  "exposure": 0.39,
+  "river_dist_km": 0.59,
+  "height_above_river_m": 23.0
+ },
+ "koregaon-park": {
+  "exposure": 0.83,
+  "river_dist_km": 0.27,
+  "height_above_river_m": 5.0
+ },
+ "mundhwa": {
+  "exposure": 0.53,
+  "river_dist_km": 0.45,
+  "height_above_river_m": 18.0
+ },
+ "dhayari": {
+  "exposure": 0.95,
+  "river_dist_km": 0.18,
+  "height_above_river_m": 0.0
+ },
+ "ambegaon": {
+  "exposure": 0.34,
+  "river_dist_km": 0.63,
+  "height_above_river_m": 35.0
+ },
+ "_meta": {
+  "method": "Index from distance to nearest river/stream/canal (OpenStreetMap) and height above it (SRTM 30 m). Not an official flood map.",
+  "computed_on": "2026-10-21"
+ }
+}

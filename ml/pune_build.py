@@ -230,6 +230,10 @@ def main():
     print("Training ...")
     models = {k: train_hazard(panel, k) for k in HAZARDS}
 
+    n_est = [a["name"] for a in AREAS if a.get("exposure_source") == "estimate"]
+    if n_est:
+        print(f"  NOTE: {len(n_est)} areas still use hand estimates for flood exposure "
+              f"(run python ml/pune_exposure.py): {', '.join(n_est[:5])}...")
     print("Scoring today ...")
     areas_out, live_count, as_of = [], 0, None
     for a in AREAS:
@@ -242,7 +246,11 @@ def main():
         as_of = day if as_of is None or day > as_of else as_of
 
         out = {"id": a["id"], "name": a["name"], "lat": a["lat"], "lon": a["lon"],
-               "elevation": round(elevs[a["id"]]), "exposure": a["exposure"]}
+               "elevation": round(elevs[a["id"]]), "exposure": a["exposure"],
+               "exposure_source": a.get("exposure_source", "estimate")}
+        if "river_dist_km" in a:
+            out["river_dist_km"] = a["river_dist_km"]
+            out["height_above_river_m"] = a["height_above_river_m"]
         for k, m in models.items():
             p = float(m["iso"].predict(m["clf"].predict_proba(x)[:, 1])[0])
             if k == "rain":                      # wetter-risk areas matter more
@@ -281,7 +289,7 @@ def main():
         "n_rows": int(len(panel)),
         "level_rule": ("Level = how many times higher than the normal frequency of the event "
                        "(x2 MODERATE, x4 HIGH, x8 CRITICAL; a chance of 50% / 80% is also HIGH / "
-                       "CRITICAL). Rain risk is scaled by the area's flood-exposure estimate."),
+                       "CRITICAL). Rain risk is scaled by the area's flood-exposure index."),
         "hazards": {k: {**HAZARDS[k], "base_rate": round(models[k]["base_rate"], 4),
                         "metrics": {mk: (None if np.isnan(mv) else round(mv, 4))
                                     for mk, mv in models[k]["metrics"].items()},
