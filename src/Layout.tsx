@@ -1,17 +1,17 @@
 import { useState } from 'react'
 import App from './App'
-import PuneRisk from './PuneRisk'
+import MaharashtraClimate from './MaharashtraClimate'
 
-type Page = 'india' | 'pune'
+type Page = 'india' | 'maharashtra'
 
 const ITEMS: { id: Page; label: string; sub: string }[] = [
   { id: 'india', label: 'India', sub: 'State-wise risk' },
-  { id: 'pune', label: 'Pune', sub: 'Area-wise risk' },
+  { id: 'maharashtra', label: 'Maharashtra', sub: 'Climate & migration' },
 ]
 
 export default function Layout() {
   const [page, setPage] = useState<Page>(() =>
-    window.location.hash === '#pune' ? 'pune' : 'india',
+    window.location.hash === '#maharashtra' ? 'maharashtra' : 'india',
   )
 
   const go = (p: Page) => {
@@ -64,7 +64,7 @@ export default function Layout() {
 
       {/* content: transform keeps App's own fixed navbar inside this area */}
       <main className="mt-12 md:ml-60 md:mt-0" style={{ transform: 'translateZ(0)' }}>
-        {page === 'india' ? <App /> : <PuneRisk />}
+        {page === 'india' ? <App /> : <MaharashtraClimate />}
       </main>
     </div>
   )

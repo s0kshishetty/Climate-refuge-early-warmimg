@@ -1,9 +1,10 @@
 # ClimateWatch India EWS — Climate Migration Early Warning System
 
-Python ML pipeline (`ml/`) + React dashboard (`src/`). The dashboard has a sidebar with two pages:
+Python ML pipeline (`ml/`) + React dashboard (`src/`). The dashboard has a sidebar with two pages (India state-wise + Maharashtra):
 
 - **India** — state-wise climate-migration risk. Reads `public/data/risk.json`, produced by `ml/train.py`.
-- **Pune** — area-wise early warning (heavy rain / flood, heat stress, dry spell). Reads `public/data/pune.json`, produced by `ml/pune_build.py`.
+- **Maharashtra** — district-wise climate 2001–2025, trend analysis and Census 2001/2011 migration. Reads `public/data/maharashtra.json`, produced by `ml/mh_build.py` (see the Maharashtra section below).
+- (Older) Pune area-wise early warning scripts `ml/pune_*.py` are still in the repo but no longer in the sidebar.
 
 ## Run order (from project root)
 ```
@@ -91,3 +92,38 @@ them as information cards only.
   modelling choices. SRTM elevation has several metres of error.
 - Heat risk is about 0 outside the hot season (about Mar-Jun); dry-spell risk is only judged in rainy months.
 - Research prototype, not an official warning. Follow IMD / PMC alerts.
+
+---
+
+# Maharashtra: climate data, trends and migration
+
+All numbers are computed from downloaded real data. Nothing is typed into the code.
+
+## Run order (from project root)
+```
+pip install -r requirements.txt
+python ml/mh_fetch.py        # -> data/raw/mh/<district>.csv   NASA POWER daily 2001-2025, 36 districts
+python ml/mh_build.py        # -> public/data/maharashtra.json
+npm install && npm run dev   # sidebar -> Maharashtra
+```
+
+## Census migration data (real, you supply it once)
+```
+mkdir -p data/raw/census
+cp data/census_template/migration_district_TEMPLATE.csv data/raw/census/migration_district.csv
+```
+Fill one row per district per census year (2001, 2011) from the Census of India D-series migration tables
+(censusindia.gov.in -> Census Tables -> Migration). Use the Census spellings (Aurangabad, Osmanabad, Buldana,
+Gondiya, Raigarh ...). Palghar did not exist in 2001/2011: it is inside Thane.
+Required columns: `district, year, total_population, total_migrants`.
+Optional: `migrants_intra_district, migrants_inter_district, migrants_inter_state, migrants_outside_india`.
+Re-run `python ml/mh_build.py`.
+
+Optional disaster records: `python ml/convert_emdat.py data/raw/emdat_india.xlsx` (already part of the India pipeline)
+- Maharashtra rows are then listed on the Climate tab.
+
+## Indicators
+Heatwave = IMD-style (Tmax >= 40 C, 37 C coastal, and >= 4.5 C above the calendar-day normal, or >= 45 C; 2+ day spells).
+Flood proxy = days with >= 64.5 mm and >= 115.6 mm rain. Drought = monsoon rain <= -25 % of the district mean (IMD),
+severe <= -50 %. Water stress = composite 0-100 of low monsoon rain, dry root-zone soil (NASA GWETROOT) and high Tmax,
+ranked inside each district. Trends = Theil-Sen slope per decade + Mann-Kendall p-value.
