@@ -3,6 +3,7 @@ import {
   LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   Legend, ResponsiveContainer, Cell,
 } from 'recharts'
+import { MigrationAnalysisTab, RiskScoreTab, ProjectionTab } from './MaharashtraAnalysis'
 
 /* ── Types (match public/data/maharashtra.json written by ml/mh_build.py) ── */
 
@@ -461,7 +462,7 @@ function MigrationTab({ data }: { data: Data }) {
 
 /* ── Page ────────────────────────────────────────────────────── */
 
-type Tab = 'climate' | 'trend' | 'migration'
+type Tab = 'climate' | 'trend' | 'migration' | 'district' | 'risk' | 'future'
 
 export default function MaharashtraClimate() {
   const [data, setData] = useState<Data | null>(null)
@@ -491,6 +492,9 @@ export default function MaharashtraClimate() {
     { id: 'climate', label: 'Climate data' },
     { id: 'trend', label: 'Trend analysis' },
     { id: 'migration', label: 'Historical migration' },
+    { id: 'district', label: 'District migration' },
+    { id: 'risk', label: 'Climate risk score' },
+    { id: 'future', label: 'Future projections' },
   ]
 
   return (
@@ -514,6 +518,9 @@ export default function MaharashtraClimate() {
         {tab === 'climate' && <ClimateTab data={data} />}
         {tab === 'trend' && <TrendTab data={data} />}
         {tab === 'migration' && <MigrationTab data={data} />}
+        {tab === 'district' && <MigrationAnalysisTab />}
+        {tab === 'risk' && <RiskScoreTab />}
+        {tab === 'future' && <ProjectionTab />}
 
         <p className="mt-10 max-w-4xl text-xs opacity-60">
           Limits: NASA POWER is a ~50 km reanalysis grid, so it smooths local extremes (fewer heavy-rain and heatwave days than a rain gauge
